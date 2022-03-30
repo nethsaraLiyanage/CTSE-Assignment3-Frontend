@@ -1,13 +1,10 @@
 body {
   margin: 0;
-  padding: 0 0 0 0;
-  font-family: sans-serif;
+  background-color: whitesmoke;
+  font-family: 'Playfair Display', serif;
 }
 
-.navbar {
-  margin-bottom: 30px;
-}
-
-.clickable {
-  cursor: pointer;
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }

@@ -1,9 +1,9 @@
-import {useEffect} from 'react'
 import styled from 'styled-components'
-import { Search ,  ShoppingCartOutlined  } from '@material-ui/icons'
+// import { Search ,  ShoppingCartOutlined  } from '@material-ui/icons'
 import { Link, NavLink } from "react-router-dom";
-import { Badge } from '@material-ui/core'
-const Navbar = ({user}) => {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { Badge } from '@material-ui/core'
+const Navbar = ({ user }) => {
   const NavStyles ={
     textDecoration: 'none' , 
     color: '#000',
@@ -32,7 +32,10 @@ const Navbar = ({user}) => {
         </Left>
         <Center>
           <SearchContainer>
-            <Search  style={{color:"gray",fontSize :"16px"}} />
+            {/* <Search  style={{color:"gray",fontSize :"16px"}} /> */}
+            <FontAwesomeIcon 
+              icon="fa-regular fa-magnifying-glass" 
+              style={{color:"gray",fontSize :"16px"}}/>
             <Input />
           </SearchContainer>
           <Button color={"#00ACEE"}>Search</Button>
@@ -47,9 +50,9 @@ const Navbar = ({user}) => {
                 style={{ textDecoration: 'none' , color: "#000"}} 
                 to="/cart">
                   <MenuItem>
-                    <Badge badgeContent={5} color="primary">
-                      <ShoppingCartOutlined />
-                    </Badge>
+                    {/* <Badge badgeContent={4} color="primary"> */}
+                      <FontAwesomeIcon icon="fa-light fa-cart-arrow-down" />
+                    {/* </Badge> */}
                   </MenuItem>
               </NavLink>
             </>
@@ -148,6 +151,6 @@ const Right = styled.div`
   align-items : center ; 
   justify-content : flex-end ;
 `
-const NavRightContainer = styled.div``
+
 
 export default Navbar
