@@ -17,12 +17,33 @@ export const sliderItems = [
   ];
 
   
-  export const categories = [
+  export const categoriesData = [
     {
       id: 1,
       image:'https://cdn-icons.flaticon.com/png/512/3659/premium/3659899.png?token=exp=1648475380~hmac=b75aabd93f6f0ac8e1cec69e5d5a0d9b',
       name: "Electronics",
-      numProducts: 100,
+      products: [
+        {
+          id: 11,
+          name: "MacBook Air",
+          price: 2000,
+          category: "Electronics",
+          image: "https://m.media-amazon.com/images/I/61RHsomZZTS._AC_SX679_.jpg"
+        },
+        {
+          id: 12,
+          name: "Smart TV",
+          price: 1000,
+          category: "Electronics",
+          image: "https://m.media-amazon.com/images/I/71xvCVFFOQL._AC_SX679_.jpg"
+        },{
+            id: 13,
+            name: "Headphone",
+            price: 200,
+            category: "Electronics",
+            image: "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SX679_.jpg"
+        }
+      ],
     },
     {
       id: 2,
@@ -42,12 +63,12 @@ export const sliderItems = [
       name: "Health & Beauty",
       numProducts: 10,
     },
-    {
-      id: 5,
-      image:"https://cdn-icons-png.flaticon.com/512/1198/1198314.png",
-      name: "Sporting Goods",
-      numProducts: 10,
-    },
+    // {
+    //   id: 5,
+    //   image:"https://cdn-icons-png.flaticon.com/512/1198/1198314.png",
+    //   name: "Sporting Goods",
+    //   numProducts: 10,
+    // },
     {
       id: 6,
       image:'https://cdn-icons.flaticon.com/png/512/3737/premium/3737726.png?token=exp=1648534379~hmac=abbf97f6b0e5224211d81e84b0ffbc48',
@@ -200,4 +221,36 @@ export const sliderItems = [
       reviews: 6,
       offer: "",
     }
+  ]
+  export const fixedPrices = [
+    {
+      id:0,
+      name: "Any",
+      array: []
+    },
+    {
+      id:1,
+      name: "$0 - $9",
+      array: [0 , 9]
+    },
+    {
+      id:2,
+      name: "$10 - $19",
+      array: [10 , 19]
+    },
+    {
+      id:3,
+      name: "$20 - $29",
+      array: [20 , 29]
+    },
+    {
+      id:4,
+      name: "$30 - $39",
+      array: [30 , 39]
+    },
+    {
+      id:5,
+      name: "more than $40",
+      array: [40 , 99]
+    },
   ]

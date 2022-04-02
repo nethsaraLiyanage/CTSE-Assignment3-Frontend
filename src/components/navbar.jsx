@@ -142,6 +142,9 @@ const Button = styled.button`
   &:active{
     box-shadow: 0 5px 10px rgba(0,0,0,0.19);
   }
+  &:focus{
+    outline: none;
+  }
 `
 const Right = styled.div`
   flex: 1 ;

@@ -4,11 +4,11 @@ import Product from './Product';
 import { popularProducts } from '../data'
 
 function Sale(props){
-    useEffect(() => {
-      props.loadProductsBySell();
-    }, [])
+    // useEffect(() => {
+    //   props.loadProductsBySell();
+    // }, [])
   const Products = popularProducts.map((product , id) => (  //props.productsBySell the data from the api
-    <Product key={id} product={product} />
+    <Product key={id} {...product} />
   ))
   return (
     <Container>
@@ -16,7 +16,7 @@ function Sale(props){
       <Header>
         <Title> 
         Flash Sales Every Day
-        {JSON.stringify(props.productsBySell)}
+        {/* {JSON.stringify(props.productsBySell)} */}
         </Title>
     </Header>
     <ProductContainer>

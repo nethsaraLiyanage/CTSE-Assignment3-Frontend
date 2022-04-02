@@ -3,14 +3,14 @@ import { useLocation } from 'react-router-dom'
 import Product from './Product'
 import { newProducts } from '../data'
 const NewArrivals = (props) => {
-  useEffect(() => {
-      props.loadProductsByArrival();
-    }, [])
+  // useEffect(() => {
+  //     props.loadProductsByArrival();
+  //   }, [])
   const Products = newProducts.map((product , id) => { //props.productsByArrival the data from the api
     return (
       <Product
         key={id}
-        product={product}
+        {...product}
       />
     )
   })
@@ -20,7 +20,6 @@ const NewArrivals = (props) => {
     <Header>
       <Title> 
         New Arrivals
-        {JSON.stringify(props.productsByArrival)}
       </Title>
     </Header>
     <ProductContainer>
