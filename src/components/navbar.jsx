@@ -1,9 +1,10 @@
 import {useEffect} from 'react'
 import styled from 'styled-components'
 import { Search ,  ShoppingCartOutlined  } from '@material-ui/icons'
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink  } from "react-router-dom";
 import { Badge } from '@material-ui/core'
 const Navbar = ({user}) => {
+  
   const NavStyles ={
     textDecoration: 'none' , 
     color: '#000',
