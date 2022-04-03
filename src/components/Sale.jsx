@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import styled from 'styled-components'
 import Product from './Product';
-import { popularProducts } from '../data'
+import { popularProducts } from '../data' //dummy data
 
 function Sale(props){
     // useEffect(() => {

@@ -1,16 +1,20 @@
 import { useEffect, useState } from 'react'
-import { getCategories } from './apiCore'
+import { getCategories  , getFilteredProducts } from './apiCore'
 import styled from 'styled-components'
-import {categoriesData }  from '../data' //dummy data
+import {categoriesData, popularProducts }  from '../data' //dummy data
 import Checkbox from '../components/Checkbox'
 import { fixedPrices } from '../data' 
 import RadioBox from '../components/RadioBox'
+import Product from '../components/Product'
 const Shop = () => {
     const [myFilters , setMyFilters] = useState({
         filters: {category: [], price: []},
     })
     const [categories, setCategories] = useState([])
     // const [error, setError] = useState(false)
+    const [limit, setLimit] = useState(6)
+    const [skip, setSkip] = useState(0)
+    const [filteredResults , setFilteredResults] = useState([])
     const init = () => {
     //  getCategories.then(data => {
     //      if (data.error) {
@@ -21,8 +25,19 @@ const Shop = () => {
     // }) 
       setCategories(categoriesData)
     }
+    const loadFilteredResults = (newFilters) => {
+      // console.log(newFilters)
+      getFilteredProducts(skip, limit, newFilters).then(data => {
+        if (data.error) {
+          console.log(data.error)
+        } else {
+          setFilteredResults(data)
+        }
+      })
+    }
     useEffect(() => {
     init()
+    loadFilteredResults(skip, limit, popularProducts)  //myFilters.filters
     },[])
     const handleFilters = (filters , filterBy) => {
       const newFilters = {...myFilters}
@@ -31,6 +46,7 @@ const Shop = () => {
           let priceValues = handlePrice(filters)
           newFilters.filters[filterBy] = priceValues
       }
+      loadFilteredResults(newFilters)
       setMyFilters(newFilters)
   }
   const handlePrice = (value) => {
@@ -43,7 +59,7 @@ const Shop = () => {
       }
       return array
   }
-
+  
   return (
     <Container>
       <Filter>
@@ -63,7 +79,9 @@ const Shop = () => {
         </FilterWrapper>
       </Filter>
     <Content>
-        {JSON.stringify(myFilters)}
+      {popularProducts.map((product, i) => (  //filteredResults.map((product, i) => (
+        <Product key={i} {...product} />
+      ))}
     </Content>
     </Container>
   )
@@ -80,12 +98,19 @@ margin: 4em 2em;
 const Filter = styled.aside`
   display: flex;
   flex-direction: column;
+  margin-right: 3em;
+  width: 22%;
 `
 const Title = styled.h4`
 margin-top: 0;
+margin-bottom: 0.5em;
 `
 const Content = styled.main`
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow-x: auto;
+  margin-bottom: 2em;
+
 `
 const FilterWrapper = styled.div``
