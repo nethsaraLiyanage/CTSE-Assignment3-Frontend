@@ -25,19 +25,19 @@ const Shop = () => {
     // }) 
       setCategories(categoriesData)
     }
-    const loadFilteredResults = (newFilters) => {
-      // console.log(newFilters)
-      getFilteredProducts(skip, limit, newFilters).then(data => {
-        if (data.error) {
-          console.log(data.error)
-        } else {
-          setFilteredResults(data)
-        }
-      })
-    }
+    // const loadFilteredResults = (newFilters) => {
+    //   // console.log(newFilters)
+    //   getFilteredProducts(skip, limit, newFilters).then(data => {
+    //     if (data.error) {
+    //       console.log(data.error)
+    //     } else {
+    //       setFilteredResults(data)
+    //     }
+    //   })
+    // }
     useEffect(() => {
     init()
-    loadFilteredResults(skip, limit, popularProducts)  //myFilters.filters
+    // loadFilteredResults(skip, limit, popularProducts)  //myFilters.filters
     },[])
     const handleFilters = (filters , filterBy) => {
       const newFilters = {...myFilters}
@@ -46,7 +46,7 @@ const Shop = () => {
           let priceValues = handlePrice(filters)
           newFilters.filters[filterBy] = priceValues
       }
-      loadFilteredResults(newFilters)
+      // loadFilteredResults(newFilters)
       setMyFilters(newFilters)
   }
   const handlePrice = (value) => {
@@ -79,9 +79,13 @@ const Shop = () => {
         </FilterWrapper>
       </Filter>
     <Content>
-      {popularProducts.map((product, i) => (  //filteredResults.map((product, i) => (
+        {popularProducts.map((product, i) => (  //allProducts.map((product, i) => (
         <Product key={i} {...product} />
-      ))}
+      )) 
+  }  
+      {/* filteredResults.map((product, i) => (  //filteredResults.map((product, i) => (
+        <Product key={i} {...product} />
+      )) */}
     </Content>
     </Container>
   )
