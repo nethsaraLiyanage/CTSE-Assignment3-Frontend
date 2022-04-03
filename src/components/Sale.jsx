@@ -1,47 +1,23 @@
+import { useEffect } from 'react';
 import styled from 'styled-components'
 import Product from './Product';
 import { popularProducts } from '../data'
-const Sale = () => {
-const Products = popularProducts.map(item => {
-        return (
-            <Product
-                key={item.id}
-                {...item}
-                
-            />
-        )
-    })
-//  const [time , setTime] = useState({
-//   hour: '00',
-//   minute: '00',
-//   second: '00',
-//  });
-//  useEffect(() => {
-//   const interval = setInterval(() => {
-   
-//    let date = new Date();
-//    setTime(()=>{
-//      return {
-//        hour: 23 - date.getHours(),
-//        minute: 59 - date.getMinutes(),
-//        second: 59 - date.getSeconds(),
-//      }
-//    })
-//    clearInterval(interval);
-//  }, [1000])
-// }, [time]);
+
+function Sale(props){
+    // useEffect(() => {
+    //   props.loadProductsBySell();
+    // }, [])
+  const Products = popularProducts.map((product , id) => (  //props.productsBySell the data from the api
+    <Product key={id} {...product} />
+  ))
   return (
     <Container>
       <Image src='https://img.ltwebstatic.com/images3_ach/2022/03/11/164698698613f0a2a60395b53a861bcedf897ae20e.webp' />
       <Header>
         <Title> 
         Flash Sales Every Day
+        {/* {JSON.stringify(props.productsBySell)} */}
         </Title>
-        {/* <Time>
-        <Item>{time.hour}h:</Item>
-        <Item>{time.minute}m:</Item>
-        <Item>{time.second}s</Item>
-       </Time> */}
     </Header>
     <ProductContainer>
       {Products}
@@ -85,13 +61,3 @@ width: 30px;
 object-fit: contain;
 margin-right: 10px;
 `
-// const Time = styled.div`
-//  line-height: 1.5em;
-//   font-weight: 500;
-//   display: flex;
-//   align-items: center;
-// `
-// const Item = styled.p`
-//  letter-spacing: 1px;
-//  font-size: 1.2em;
-// `

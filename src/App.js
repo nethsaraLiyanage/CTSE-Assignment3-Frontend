@@ -7,8 +7,12 @@ import Home from './pages/Home';
 import Categories from './pages/Categories';
 import NewsLetter from './components/Newsletter';
 import Footer from './components/Footer';
+import { API } from './config';
+import Shop from './pages/Shop';
+
 import RegisterPage from './pages/auth/RegisterPage';
 import LoginPage from './pages/auth/LoginPage';
+
 
 
 
@@ -20,8 +24,7 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/shop" element={<Categories />} />
-          {/* <Route path="/categoryPage" element={<h1>category page</h1>} /> */}
+          <Route path="/shop" element={<Shop />} />
           <Route path="/contact" element={<h1>contact</h1>} />
 
           <Route path="/register" element={<RegisterPage />} />
