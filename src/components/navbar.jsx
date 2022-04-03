@@ -1,9 +1,10 @@
 import {useEffect} from 'react'
 import styled from 'styled-components'
 import { Search ,  ShoppingCartOutlined  } from '@material-ui/icons'
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink  } from "react-router-dom";
 import { Badge } from '@material-ui/core'
 const Navbar = ({user}) => {
+  
   const NavStyles ={
     textDecoration: 'none' , 
     color: '#000',
@@ -140,6 +141,9 @@ const Button = styled.button`
   box-shadow: 0 10px 20px rgba(0,0,0,0.19);
   &:active{
     box-shadow: 0 5px 10px rgba(0,0,0,0.19);
+  }
+  &:focus{
+    outline: none;
   }
 `
 const Right = styled.div`

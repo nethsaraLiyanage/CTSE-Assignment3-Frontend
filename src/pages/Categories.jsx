@@ -1,21 +1,21 @@
 import React  from 'react'
-import {categories }  from '../data'
+import {categoriesData }  from '../data' //dummy data
 import styled from 'styled-components'
 import { Link , useLocation } from 'react-router-dom'
-const Categories = () => {
+const Categories = ({categories}) => {
   const NavStyles ={
     textDecoration: 'none' , 
     color: '#000',
   }
-  const CategoryElements = categories.map((category) => {
+  const CategoryElements = categoriesData.map((category) => {
     return(
       <Link  to={`/${category.name}`}
         style={NavStyles}
         key={category.id}
       >
         <Category >
-        <CategoryImage src={category.image}/>
-        <CategoryName>{category.name}</CategoryName>
+          <CategoryImage src={category.image}/>
+          <CategoryName>{category.name}</CategoryName>
         </Category>
       </Link>
       
