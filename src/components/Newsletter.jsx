@@ -20,7 +20,7 @@ const NewsLetter = () => {
         <InputContainer>
           <Input  
             placeholder='Your Email Address'
-            id='email'
+            id='newsEmail'
             type='email'
             name='email'
             onChange={handleChange}
