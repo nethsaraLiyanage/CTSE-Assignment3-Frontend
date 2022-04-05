@@ -3,7 +3,7 @@ import {   ShoppingCartOutlined  } from '@material-ui/icons'
 const Product = (props) => {
  const calcDiscount =(props.discount / 100) * props.price
   return (
-    <ProductEle key={props.id}>
+    <ProductEle>
         <ImageContainer>
           {props.offer && <Offer>{props.offer}</Offer>}
           <ProductImage src={props.image} alt={props.name}/>

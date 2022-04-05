@@ -6,9 +6,9 @@ const RadioBox = ({fixedPrices , handleFilters}) => {
         handleFilters(e.target.value )
         setValue(e.target.value)
     }
-  return (
-      fixedPrices.map((fixedPrice , index) => (
-       <ListItem key={fixedPrice.id}>
+    return (
+    fixedPrices.map((fixedPrice , index) => (
+    <ListItem key={fixedPrice.id}>
         <Input 
         type="radio" 
         id={index}
@@ -17,10 +17,9 @@ const RadioBox = ({fixedPrices , handleFilters}) => {
         onChange={handleChange}
         />
         <Label htmlFor={index} >{fixedPrice.name}</Label>
-       </ListItem>
-      ))
-       
-  )
+    </ListItem>
+    ))
+) 
 }
 
 export default RadioBox
@@ -30,5 +29,5 @@ list-style: none;
 const Input = styled.input`
 `
 const Label = styled.label`
- margin-left: 0.5em;
+margin-left: 0.5em;
 `

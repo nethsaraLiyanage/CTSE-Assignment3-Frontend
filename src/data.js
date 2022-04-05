@@ -101,7 +101,7 @@ export const sliderItems = [
 ]
   export const popularProducts = [
     {
-      id:1,
+      id:10,
       name: "Clear Acrylic Frame Glasses" ,
       image: "https://img.ltwebstatic.com/images3_pi/2021/02/05/161249415611eacd714290f50d7209d58f1f18efbe_thumbnail_900x.webp",
       price: 30.99,
@@ -110,7 +110,7 @@ export const sliderItems = [
       offer: "Free Shipping",
     },
     {
-      id:2,
+      id:20,
       name: "3pcs Shell Decor Necklace",
       image:"https://img.ltwebstatic.com/images3_pi/2022/03/04/16463801071500c4d404d02d67cf13ecb4d0ea073f_thumbnail_900x.webp",
       price: 35.99,
@@ -120,7 +120,7 @@ export const sliderItems = [
       offer: "Buy 1 Get 1 Free",
     },
     {
-      id:3,
+      id:30,
       name: "1pc Woven Wall Hanging",
       image:"https://img.ltwebstatic.com/images3_pi/2021/11/09/163642242502c5f090319808879f0d146ed4aa5a87_thumbnail_900x.webp",
       price: 15.99,
@@ -130,7 +130,7 @@ export const sliderItems = [
       offer: "Free Shipping",
     },
     {
-      id:4,
+      id:40,
       name: "Graphic Airpods Case",
       image:"https://img.ltwebstatic.com/images3_pi/2020/09/15/16001441248e5bf2a96326e4a2fe3bd72c2ec9cb60_thumbnail_900x.webp",
       price: 30.99,
@@ -140,7 +140,7 @@ export const sliderItems = [
       offer: "Buy 1 Get 1 Free",
     },
     {
-      id:5,
+      id:50,
       name: "Toddler Girls Striped Puff Sleeve Belted Dress",
       image:"https://img.ltwebstatic.com/images3_pi/2021/02/18/1613616545700f279547cf14d9843d6e0aee6a88ba_thumbnail_900x.webp",
       price: 30.99,
@@ -150,7 +150,7 @@ export const sliderItems = [
       offer: "Buy 1 Get 1 Free",
     },
     {
-      id:6,
+      id:60,
       name: "1pc Facial Roller Massager & 1pc Gua Sha Board",
       image:"https://img.ltwebstatic.com/images3_pi/2021/08/09/16285024847ff83d6f1d46bd428b24cb77461c2e5a_thumbnail_900x.webp",
       price: 30.99,
@@ -162,7 +162,7 @@ export const sliderItems = [
   ]
   export const newProducts = [
     {
-      id:1,
+      id:19,
       name: "Clear Acrylic Frame Glasses" ,
       image: "https://img.ltwebstatic.com/images3_pi/2021/02/05/161249415611eacd714290f50d7209d58f1f18efbe_thumbnail_900x.webp",
       price: 30.99,
@@ -172,7 +172,7 @@ export const sliderItems = [
       offer: "",
     },
     {
-      id:2,
+      id:29,
       name: "3pcs Shell Decor Necklace",
       image:"https://img.ltwebstatic.com/images3_pi/2022/03/04/16463801071500c4d404d02d67cf13ecb4d0ea073f_thumbnail_900x.webp",
       price: 35.99,
@@ -182,7 +182,7 @@ export const sliderItems = [
       offer: "",
     },
     {
-      id:3,
+      id:39,
       name: "1pc Woven Wall Hanging",
       image:"https://img.ltwebstatic.com/images3_pi/2021/11/09/163642242502c5f090319808879f0d146ed4aa5a87_thumbnail_900x.webp",
       price: 15.99,
@@ -192,7 +192,7 @@ export const sliderItems = [
       offer: "",
     },
     {
-      id:4,
+      id:49,
       name: "Graphic Airpods Case",
       image:"https://img.ltwebstatic.com/images3_pi/2020/09/15/16001441248e5bf2a96326e4a2fe3bd72c2ec9cb60_thumbnail_900x.webp",
       price: 30.99,
@@ -202,7 +202,7 @@ export const sliderItems = [
       offer: "",
     },
     {
-      id:5,
+      id:59,
       name: "Toddler Girls Striped Puff Sleeve Belted Dress",
       image:"https://img.ltwebstatic.com/images3_pi/2021/02/18/1613616545700f279547cf14d9843d6e0aee6a88ba_thumbnail_900x.webp",
       price: 30.99,
@@ -212,7 +212,7 @@ export const sliderItems = [
       offer: "",
     },
     {
-      id:6,
+      id:69,
       name: "1pc Facial Roller Massager & 1pc Gua Sha Board",
       image:"https://img.ltwebstatic.com/images3_pi/2021/08/09/16285024847ff83d6f1d46bd428b24cb77461c2e5a_thumbnail_900x.webp",
       price: 30.99,
