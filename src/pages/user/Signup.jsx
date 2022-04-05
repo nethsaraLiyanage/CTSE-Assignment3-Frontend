@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { register } from '../auth/authRegister'
+import { register } from '../auth'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom' 
 const Signup = () => {
@@ -65,7 +65,7 @@ const Signup = () => {
       <Logo>O.store</Logo>
       <LoginContainer>
         <Title>Sign-Up</Title>
-        { signUpValues.error && <Error>{signUpValues.error}</Error>}
+        { error && <Error>{error}</Error>}
         <Form onSubmit={handleSubmit}>
           <Label htmlFor='firstName'>First Name</Label>
           <Input 
@@ -74,7 +74,7 @@ const Signup = () => {
               name='firstName'
               placeholder='Enter your First Name'
               onChange={handleChange}
-              value={signUpValues.firstName}
+              value={firstName}
               required
           />
           <Label htmlFor='lastName'>Last Name</Label>
@@ -84,7 +84,7 @@ const Signup = () => {
               name='lastName'
               placeholder='Enter your Last Name'
               onChange={handleChange}
-              value={signUpValues.lastName}
+              value={lastName}
               required
           />
           <Label htmlFor='email'>Email</Label>
@@ -94,7 +94,7 @@ const Signup = () => {
               name='email'
               placeholder='Enter your Email'
               onChange={handleChange}
-              value={signUpValues.email}
+              value={email}
               required
           />
           <Label htmlFor='password'>Password</Label>
@@ -104,7 +104,7 @@ const Signup = () => {
               name='password'
               placeholder='Enter your Password'
               onChange={handleChange}
-              value={signUpValues.password}
+              value={password}
               required
           />
           <Label htmlFor='conPassword'>Confirm Password</Label>
@@ -114,15 +114,15 @@ const Signup = () => {
               name='confirmPassword'
               placeholder='Confirm Password'
               onChange={handleChange}
-              value={signUpValues.confirmPassword}
+              value={confirmPassword}
               required
           />
-          { signUpValues.error === "password does not match" 
+          { error === "password does not match" 
             && <Error>Password does not match</Error>
           }   
           <Button 
             color={"#00acee"} 
-            onClick={signUpValues.success && redirect}
+            onClick={() => success && redirect()}
           >Sign-Up</Button>
           <Message>By continuing, you agree to  
             <span>O.store</span>'s Conditions of Use and Privacy Notice.

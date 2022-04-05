@@ -1,11 +1,18 @@
 import styled from 'styled-components'
 import { Search ,  ShoppingCartOutlined  } from '@material-ui/icons'
-import { Link, NavLink  } from "react-router-dom";
+import { Link, NavLink  , useNavigate } from "react-router-dom";
 import { Badge } from '@material-ui/core'
+import { logout , isAuthenticated } from '../pages/auth'
 const Navbar = ({user}) => {
   const NavStyles ={
     textDecoration: 'none' , 
     color: '#000',
+  }
+  let navigate = useNavigate();
+  // route change to Home page
+  const redirect =() =>{
+    let path = "/"; 
+    navigate(path);
   }
   return (
     <Container>
@@ -37,7 +44,7 @@ const Navbar = ({user}) => {
           <Button color={"#00ACEE"}>Search</Button>
         </Center>
         <Right>
-          {!user &&(
+          {!isAuthenticated() && (
             <>
               <NavLink 
                 style={{ textDecoration: 'none' , color: "#000"}} 
@@ -46,7 +53,24 @@ const Navbar = ({user}) => {
                 style={{ textDecoration: 'none' , color: "#000"}} 
                 to="/cart">
                   <MenuItem>
-                    <Badge badgeContent={5} color="primary">
+                    <Badge badgeContent={0} color="primary">
+                      <ShoppingCartOutlined />
+                    </Badge>
+                  </MenuItem>
+              </NavLink>
+            </>
+          ) }{ isAuthenticated() && (
+            <>
+              <MenuItem
+                onClick={() => logout(() => {
+                  redirect()
+                })}
+              >Log Out</MenuItem>
+              <NavLink 
+                style={{ textDecoration: 'none' , color: "#000"}} 
+                to="/cart">
+                  <MenuItem>
+                    <Badge badgeContent={2} color="primary">
                       <ShoppingCartOutlined />
                     </Badge>
                   </MenuItem>
@@ -98,6 +122,7 @@ const MenuItem = styled.li`
   margin-left : 25px ;
   font-weight: 500;
   letter-spacing: 1px;
+  color: #000;
 `
 const Center = styled.div`
   flex: 1 ;

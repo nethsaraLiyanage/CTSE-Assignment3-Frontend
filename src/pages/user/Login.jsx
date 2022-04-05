@@ -1,12 +1,55 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from "react-router-dom";
+import { authenticate, signin } from '../auth';
+import { Button , Spinner} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 const Login = () => {
+  const [loginValues, setLoginValues] = React.useState({
+    email: "",
+    password: "",
+    error: "",
+    loading: false,
+    redirectToReferrer: false
+  });
+  const { email, password, error, loading , redirectToReferrer} = loginValues;
+  const handleChange = event => {
+    const { name, value } = event.target;
+    setLoginValues({ ...loginValues, error: false, [name]: value });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setLoginValues({ ...loginValues, error: false, loading: true });
+    signin({ email, password }).then(data => {
+      if (data.error) {
+        setLoginValues({ ...loginValues, error: data.error, loading: false });
+      } else {
+        authenticate(
+          data, 
+          () => {
+            setLoginValues({
+              ...loginValues,
+              redirectToReferrer: true
+            });
+          }
+        );
+      }
+    });
+  };
+
   let navigate = useNavigate(); 
+  // route change to Home page
+  const redirect =() =>{
+    let path = "/"; 
+    navigate(path);
+  }
+  // route change to Login page
   const routeChange = () =>{ 
     let path = "/register"; 
     navigate(path);
   }
+
   return (
   <MainContainer>
     <ImageContainer src="https://img.freepik.com/free-vector/access-control-system-abstract-concept_335657-3180.jpg?t=st=1649055635~exp=1649056235~hmac=32f77414472807ae11efde70a5f31fe7644eddb72a2ad933f5eea28995c1fcdc&w=740" alt="img" />
@@ -15,7 +58,7 @@ const Login = () => {
       <LoginContainer>
         <Title>Sign-In</Title>
         <Form 
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
         >
           <Label htmlFor='mail'>Email</Label>
           <Input 
@@ -23,8 +66,8 @@ const Login = () => {
               type='email'
               name='email'
               placeholder='Enter your Email'
-              // onChange={handleChange}
-              // value={formData.email}
+              onChange={handleChange}
+              value={email}
               // error={errors.email}
           />
           <Label htmlFor='password'>Password</Label>
@@ -33,10 +76,25 @@ const Login = () => {
               type='password'
               name='password'
               placeholder='Enter your Password'
-              // onChange={handleChange}
-              // value={formData.password}
+              onChange={handleChange}
+              value={password}
           />
-          <Button color={"#00acee"}>Sign-In</Button>
+          {loading ? 
+          <Button variant="primary" disabled>
+          <Spinner
+              as="span"
+              animation="grow"
+              size="sm"
+              role="status"
+              aria-hidden="true"
+            />
+            Sign-In...
+          </Button> :  
+          <SignButton 
+            color={"#00acee"}
+            onClick={()=> redirectToReferrer && redirect()}
+          >Sign-In</SignButton> }
+  
           <Message>By continuing, you agree to <span>O.store</span>'s Conditions of Use and Privacy Notice.</Message>
         </Form>
       </LoginContainer>
@@ -45,9 +103,9 @@ const Login = () => {
             <NewQues>New to <span>O.store</span> ?</NewQues>
             <HorizonLine>______________</HorizonLine>
           </NewContainer>
-          <Btn onClick={routeChange}>Create your account</Btn>
+          <CreateBtn onClick={() => routeChange()}>Create your account</CreateBtn>
     </Container>
-   </MainContainer>
+  </MainContainer>
   )
   
   }
@@ -121,7 +179,7 @@ const Message = styled.p`
   color: #111;
   font-size: 12px;
 `
-const Button = styled.button`
+const SignButton = styled.button`
   margin-top: 10px;
   height: 33px;
   line-height: 19px;
@@ -155,7 +213,7 @@ const NewQues = styled.span`
   font-size: 15px;
   margin: 0 10px;
 `
-const Btn = styled.button`
+const CreateBtn = styled.button`
   cursor: pointer;
   margin-top: 10px;
   padding: 5px 30px;
