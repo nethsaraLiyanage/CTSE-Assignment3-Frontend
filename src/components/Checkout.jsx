@@ -1,11 +1,34 @@
 import FormContainer from './UI/FormContainer';
 import React, {useEffect, useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import reactDom from 'react-dom';
+import CreditCard from './CreditCard';
 
 const Checkout = () => {
     const checkForm = () => {
+        const [firstname, setFirst] = useState("");
+        const [lastname, setLast] = useState("");
+        const [phone, setPhone] = useState("");
+
+        function onSubmit() {
+            console.log('Name ='+ firstname + lastname);
+            console.log('Phone Number' + phone);
+        }
+        const state = {
+            disp: "none"
+        };
+        const showDiv = () => {
+            state.disp = "block";
+            {console.log(state.disp)}
+        }
+        const hideDiv = () => {
+            state.disp = "none";
+            {console.log(state.disp)}
+        }
+
+
         return (
-            <div className='py-4'>
+            <div className='py-4' onSubmit={onSubmit} >
         <div className='container'>
             <div className='row'>
 
@@ -19,26 +42,26 @@ const Checkout = () => {
                                 <div className='col-md-6'>
                                     <div className='form-group mb-3'>
                                         <label>First Name</label>
-                                        <input type='text' name='firstname' className='form-control'/>
+                                        <input type='text' name='firstname' value={firstname} onChange={(e) => setFirst(e.target.value)} required className='form-control'/>
                                     </div>
                                 </div>
 
                                 <div className='col-md-6'>
                                     <div className='form-group mb-3'>
                                         <label>Last Name</label>
-                                        <input type='text' name='lastname' className='form-control'/>
+                                        <input type='text' name='lastname' value={lastname} onChange={(e) => setLast(e.target.value)} required className='form-control'/>
                                     </div>
                                 </div>
                                 <div className='col-md-6'>
                                     <div className='form-group mb-3'>
                                         <label>Phone</label>
-                                        <input type='text' name='phone' className='form-control'/>
+                                        <input type='tel' name='phone' value={phone} onChange={(e) => setPhone(e.target.value)} required className='form-control'/>
                                     </div>
                                 </div>
                                 <div className='col-md-6'>
                                     <div className='form-group mb-3'>
                                         <label>Email Address</label>
-                                        <input type='text' name='email' className='form-control'/>
+                                        <input type='email' name='email' className='form-control'/>
                                     </div>
                                 </div>
                                 <div className='col-md-12'>
@@ -69,12 +92,13 @@ const Checkout = () => {
                                 <div className='col-md-6'>
                                     <div className='form-group mb-3'>
                                         <label>Select Payment Method</label> <br></br>
-                                        <small>Cash On Delivery</small> <input type='radio' value= 'cash' name='payment'/> <br></br>
-                                        <small>Credit Card</small> <input type='radio' id='cred' value= 'credit' name='payment' />
+                                        <small>Cash On Delivery</small> <input type='radio' id='cash' value= 'cash' onClick={hideDiv} name='payment'/> <br></br>
+                                        <small>Credit Card</small> <input type='radio' id='cred' value= 'credit' onClick={showDiv}  name='payment' />
                                     </div>
                                 </div>
                                 
-                                <div id='disp'>
+                                    
+                                <div id='disp' style={{display: state.disp }}>
 
                                 <div className='col-md-8'>
                                     <div className='form-group mb-3'>
@@ -139,16 +163,12 @@ const Checkout = () => {
     
         </div>
     </div>
+    
         )
         
     }
     const credPay = () => {
         checkForm();
-        // let tog = document.querySelector('cred');
-        // let divv = document.querySelector('disp');
-        // tog.addEventListener('click', () => {
-        //     divv.style.display = 'block';
-        // })
         return (checkForm())
     }
 
@@ -160,3 +180,17 @@ credPay()
     )
 }
 export default Checkout;
+
+// const CreditCard = () => {
+//     let tog = document.getElementById('cred');
+//     let togChash = document.getElementById('cash');
+//     let disCredit = document.getElementById('disp');
+//     disCredit.style.display = 'none';
+//     tog.addEventListener('click', () => {
+//         disCredit.style.display = 'block';
+//     })
+//     togChash.addEventListener('click', () => {
+//         disCredit.style.display = 'none';
+//     })
+// }
+// export default CreditCard;
