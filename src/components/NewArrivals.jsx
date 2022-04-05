@@ -6,10 +6,10 @@ const NewArrivals = (props) => {
   // useEffect(() => {
   //     props.loadProductsByArrival();
   //   }, [])
-  const Products = newProducts.map((product , id) => { //props.productsByArrival the data from the api
+  const Products = newProducts.map((product) => { //props.productsByArrival the data from the api
     return (
       <Product
-        key={id}
+        key={product.id}
         {...product}
       />
     )

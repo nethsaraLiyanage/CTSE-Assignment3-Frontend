@@ -7,8 +7,8 @@ function Sale(props){
     // useEffect(() => {
     //   props.loadProductsBySell();
     // }, [])
-  const Products = popularProducts.map((product , id) => (  //props.productsBySell the data from the api
-    <Product key={id} {...product} />
+  const Products = popularProducts.map((product ) => (  //props.productsBySell the data from the api
+    <Product key={product.id} {...product} />
   ))
   return (
     <Container>
