@@ -1,13 +1,16 @@
 import styled from 'styled-components'
 import { useLocation } from 'react-router-dom' 
 import Product from './Product'
-import { newProducts } from '../data'
-const NewArrivals = ({cartItems , setCartItems}) => {
-  const Products = newProducts.map(item => {
+import { newProducts } from '../data' //dummy data
+const NewArrivals = (props) => {
+  // useEffect(() => {
+  //     props.loadProductsByArrival();
+  //   }, [])
+  const Products = newProducts.map((product) => { //props.productsByArrival the data from the api
     return (
       <Product
-        key={item.id}
-        {...item}
+        key={product.id}
+        {...product}
       />
     )
   })

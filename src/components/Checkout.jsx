@@ -2,13 +2,21 @@ import FormContainer from './UI/FormContainer';
 import React, {useEffect, useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import reactDom from 'react-dom';
-import CreditCard from './CreditCard';
+
 
 const Checkout = () => {
     const checkForm = () => {
         const [firstname, setFirst] = useState("");
         const [lastname, setLast] = useState("");
         const [phone, setPhone] = useState("");
+        const [email, setEmail] = useState("");
+        const [address, setAddress] = useState("");
+        const [city, setCity] = useState("");
+        const [st, setSt] = useState("");
+        const [zip, setZip] = useState("");
+        const [card, setCard] = useState("");
+        const [cvv, setCVV] = useState("");
+        const [exDate, setExDate] = useState("");
 
         function onSubmit() {
             console.log('Name ='+ firstname + lastname);
@@ -19,11 +27,9 @@ const Checkout = () => {
         };
         const showDiv = () => {
             state.disp = "block";
-            {console.log(state.disp)}
         }
         const hideDiv = () => {
             state.disp = "none";
-            {console.log(state.disp)}
         }
 
 
@@ -61,61 +67,62 @@ const Checkout = () => {
                                 <div className='col-md-6'>
                                     <div className='form-group mb-3'>
                                         <label>Email Address</label>
-                                        <input type='email' name='email' className='form-control'/>
+                                        <input type='email' name='email' value={email} onChange={(e) => setEmail(e.target.value)} required className='form-control'/>
                                     </div>
                                 </div>
                                 <div className='col-md-12'>
                                     <div className='form-group mb-3'>
-                                        <label>Full Adress</label>
-                                        <textarea rows= '3' name='address' className='form-control'></textarea>
+                                        <label>Full Address</label>
+                                        <textarea rows= '3' name='address' value={address} onChange={(e) => setAddress(e.target.value)} required className='form-control'></textarea>
                                     </div>
                                 </div>
 
                                 <div className='col-md-4'>
                                     <div className='form-group mb-3'>
                                         <label>City</label>
-                                        <input type='text' name='city' className='form-control'/>
+                                        <input type='text' name='city' value={city} onChange={(e) => setCity(e.target.value)} required className='form-control'/>
                                     </div>
                                 </div>
                                 <div className='col-md-4'>
                                     <div className='form-group mb-3'>
                                         <label>State</label>
-                                        <input type='text' name='state' className='form-control'/>
+                                        <input type='text' name='state' value={st} onChange={(e) => setSt(e.target.value)} required className='form-control'/>
                                     </div>
                                 </div>
                                 <div className='col-md-4'>
                                     <div className='form-group mb-3'>
                                         <label>Zip Code</label>
-                                        <input type='text' name='zipcode' className='form-control'/>
+                                        <input type='text' name='zipcode' value={zip} onChange={(e) => setZip(e.target.value)} required className='form-control'/>
                                     </div>
                                 </div>
                                 <div className='col-md-6'>
                                     <div className='form-group mb-3'>
                                         <label>Select Payment Method</label> <br></br>
                                         <small>Cash On Delivery</small> <input type='radio' id='cash' value= 'cash' onClick={hideDiv} name='payment'/> <br></br>
-                                        <small>Credit Card</small> <input type='radio' id='cred' value= 'credit' onClick={showDiv}  name='payment' />
+                                        <small>Credit Card</small> <input type='radio' id='cred' value= 'credit' onClick={showDiv()}  name='payment' />
                                     </div>
                                 </div>
                                 
+                                {/* This div should be hidden or visible depending on the two functions above. hideDiv and showDiv */}
                                     
                                 <div id='disp' style={{display: state.disp }}>
 
                                 <div className='col-md-8'>
                                     <div className='form-group mb-3'>
                                         <label>Card Number</label>
-                                        <input type='text' name='cardNumber' className='form-control'/>
+                                        <input type='text' name='cardNumber' value={card} onChange={(e) => setCard(e.target.value)} required className='form-control'/>
                                     </div>
                                 </div>
                                 <div className='col-md-6'>
                                     <div className='form-group mb-3'>
                                         <label>CVV</label>
-                                        <input type='text' name='cvv' className='form-control'/>
+                                        <input type='text' name='cvv' value={cvv} onChange={(e) => setCVV(e.target.value)} required className='form-control'/>
                                     </div>
                                 </div>
                                 <div className='col-md-6'>
                                     <div className='form-group mb-3'>
                                         <label>Expiration Date</label>
-                                        <input type='date' name='exDate' className='form-control'/>
+                                        <input type='date' name='exDate' value={exDate} onChange={(e) => setExDate(e.target.value)} required className='form-control'/>
                                     </div>
                                 </div>
 
