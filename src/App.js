@@ -12,6 +12,7 @@ import { API } from './config';
 import Shop from './pages/Shop';
 import Login from './pages/user/Login';
 import Signup from './pages/user/Signup';
+
 import Checkout from './components/Checkout';
 
 function App() {
