@@ -1,3 +1,5 @@
+import { nanoid } from "nanoid";
+
 export const sliderItems = [
     {
       id: 1,
@@ -15,79 +17,78 @@ export const sliderItems = [
       alt: 'slider3'
     },
   ];
-
-  
   export const categoriesData = [
     {
-      id: 1,
+      id: nanoid(),
       image:'https://cdn-icons.flaticon.com/png/512/3659/premium/3659899.png?token=exp=1648475380~hmac=b75aabd93f6f0ac8e1cec69e5d5a0d9b',
       name: "Electronics",
-      products: [
-        {
-          id: 11,
-          name: "MacBook Air",
-          price: 2000,
-          category: "Electronics",
-          image: "https://m.media-amazon.com/images/I/61RHsomZZTS._AC_SX679_.jpg"
-        },
-        {
-          id: 12,
-          name: "Smart TV",
-          price: 1000,
-          category: "Electronics",
-          image: "https://m.media-amazon.com/images/I/71xvCVFFOQL._AC_SX679_.jpg"
-        },{
-            id: 13,
-            name: "Headphone",
-            price: 200,
-            category: "Electronics",
-            image: "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SX679_.jpg"
-        }
-      ],
     },
     {
-      id: 2,
+      id: nanoid(),
       image: "https://cdn-icons.flaticon.com/png/512/3362/premium/3362661.png?token=exp=1648475268~hmac=28a963ad57b65170963c68af33941584",
       name: "Home Appliances",
       numProducts: 50,
     },
     {
-      id: 3,
+      id: nanoid(),
       image:"https://cdn-icons-png.flaticon.com/512/1127/1127487.png",
       name: "Fashion",
-      numProducts: 10,
     },
     {
-      id: 4,
+      id: nanoid(),
       image:"https://cdn-icons-png.flaticon.com/512/3163/3163195.png",
       name: "Health & Beauty",
       numProducts: 10,
     },
-    // {
-    //   id: 5,
-    //   image:"https://cdn-icons-png.flaticon.com/512/1198/1198314.png",
-    //   name: "Sporting Goods",
-    //   numProducts: 10,
-    // },
     {
-      id: 6,
+      id: nanoid(),
+      image:"https://cdn-icons-png.flaticon.com/512/1198/1198314.png",
+      name: "Sporting Goods",
+      numProducts: 10,
+    },
+    {
+      id: nanoid(),
       image:'https://cdn-icons.flaticon.com/png/512/3737/premium/3737726.png?token=exp=1648534379~hmac=abbf97f6b0e5224211d81e84b0ffbc48',
       name: "Pet Supplies",
       numProducts: 100,
     },
     {
-      id: 7,
+      id: nanoid(),
       image: "https://cdn-icons.flaticon.com/png/512/3514/premium/3514242.png?token=exp=1648534447~hmac=00d309493193a3cfc8c1869b7749664f",
       name: "Supermarket",
       numProducts: 50,
     },
     {
-      id: 8,
+      id: nanoid(),
       image:"https://cdn-icons-png.flaticon.com/512/1575/1575247.png",
       name: "Books, Music & Movies",
       numProducts: 10,
     }
   ];
+  export const productsData = [
+        {
+          id: nanoid(),
+          name: "MacBook Air",
+          price: 2000,
+          image: "https://m.media-amazon.com/images/I/61RHsomZZTS._AC_SX679_.jpg",
+          desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.",
+          rating: 4,
+          reviews: 10
+        },
+        {
+          id: nanoid(),
+          name: "Smart TV",
+          price: 1000,
+          category: "Electronics",
+          image: "https://m.media-amazon.com/images/I/71xvCVFFOQL._AC_SX679_.jpg"
+        },{
+            id: nanoid(),
+            name: "Headphone",
+            price: 200,
+            category: "Electronics",
+            image: "https://m.media-amazon.com/images/I/71o8Q5XJS5L._AC_SX679_.jpg"
+        }
+      ];
   export const offers = [{
     id: 1,
     image: "https://img.ltwebstatic.com/images3_ach/2022/03/11/164698698613f0a2a60395b53a861bcedf897ae20e.webp",
@@ -162,7 +163,7 @@ export const sliderItems = [
   ]
   export const newProducts = [
     {
-      id:19,
+      id:nanoid(),
       name: "Clear Acrylic Frame Glasses" ,
       image: "https://img.ltwebstatic.com/images3_pi/2021/02/05/161249415611eacd714290f50d7209d58f1f18efbe_thumbnail_900x.webp",
       price: 30.99,
@@ -170,9 +171,10 @@ export const sliderItems = [
       discount: 0,
       reviews: 10,
       offer: "",
+      category: "accessories",
     },
     {
-      id:29,
+      id:nanoid(),
       name: "3pcs Shell Decor Necklace",
       image:"https://img.ltwebstatic.com/images3_pi/2022/03/04/16463801071500c4d404d02d67cf13ecb4d0ea073f_thumbnail_900x.webp",
       price: 35.99,
@@ -180,9 +182,10 @@ export const sliderItems = [
       rating: 4,
       reviews: 20,
       offer: "",
+      category: "accessories",
     },
     {
-      id:39,
+      id:nanoid(),
       name: "1pc Woven Wall Hanging",
       image:"https://img.ltwebstatic.com/images3_pi/2021/11/09/163642242502c5f090319808879f0d146ed4aa5a87_thumbnail_900x.webp",
       price: 15.99,
@@ -190,6 +193,7 @@ export const sliderItems = [
       rating: 5,
       reviews: 20,
       offer: "",
+      category: "home decor",
     },
     {
       id:49,
@@ -202,7 +206,7 @@ export const sliderItems = [
       offer: "",
     },
     {
-      id:59,
+      id:nanoid(),
       name: "Toddler Girls Striped Puff Sleeve Belted Dress",
       image:"https://img.ltwebstatic.com/images3_pi/2021/02/18/1613616545700f279547cf14d9843d6e0aee6a88ba_thumbnail_900x.webp",
       price: 30.99,
@@ -210,9 +214,10 @@ export const sliderItems = [
       rating: 5,
       reviews: 8,
       offer: "",
+      category: "fashion",
     },
     {
-      id:69,
+      id:nanoid(),
       name: "1pc Facial Roller Massager & 1pc Gua Sha Board",
       image:"https://img.ltwebstatic.com/images3_pi/2021/08/09/16285024847ff83d6f1d46bd428b24cb77461c2e5a_thumbnail_900x.webp",
       price: 30.99,
@@ -220,6 +225,7 @@ export const sliderItems = [
       rating: 5,
       reviews: 6,
       offer: "",
+      category: "health & beauty",
     }
   ]
   export const fixedPrices = [
@@ -253,4 +259,21 @@ export const sliderItems = [
       name: "more than $40",
       array: [40 , 99]
     },
+  ]
+  export const cartItems = [
+    {
+      id:nanoid(),
+      name: "Clear Acrylic Frame Glasses" ,
+      image:"https://img.ltwebstatic.com/images3_pi/2021/02/05/161249415611eacd714290f50d7209d58f1f18efbe_thumbnail_900x.webp",
+      price: 30.99,
+      category: "accessories",
+      quantity: 1,
+    },{
+      id:nanoid(),
+      name: "3pcs Shell Decor Necklace",
+      image:"https://img.ltwebstatic.com/images3_pi/2022/03/04/16463801071500c4d404d02d67cf13ecb4d0ea073f_thumbnail_900x.webp",
+      price: 35.99,
+      category: "accessories",
+      quantity: 2,
+    }
   ]
