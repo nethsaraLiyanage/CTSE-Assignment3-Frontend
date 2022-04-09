@@ -4,7 +4,7 @@ import Slider from '../components/Slider'
 import Categories from './Categories'
 import Sale from '../components/Sale'
 import NewArrivals from '../components/NewArrivals'
-import { getProducts } from './apiCore'
+import { getProducts } from './core/apiCore'
 const Home = () => {
     const [productsBySell, setProductsBySell] = useState([])
     const [productsByArrival, setProductsByArrival] = useState([])

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { getCategories  , getFilteredProducts } from './apiCore'
+import { getCategories  , getFilteredProducts } from './core/apiCore'
 import styled from 'styled-components'
 import {categoriesData, popularProducts }  from '../data' //dummy data
 import Checkbox from '../components/Checkbox'
