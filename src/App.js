@@ -8,13 +8,13 @@ import NewsLetter from './components/Newsletter';
 import Footer from './components/Footer';
 // import RegisterPage from './pages/auth/RegisterPage';
 // import LoginPage from './pages/auth/LoginPage';
-import { API } from './config';
 import Shop from './pages/Shop';
 import Login from './pages/user/Login';
 import Signup from './pages/user/Signup';
-
 import Checkout from './components/Checkout';
 import Cart from './pages/Cart';
+import Product from './pages/Product';
+import { API } from './config';
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/product" element={<Product />} />
           <Route path="/contact" element={<h1>contact</h1>} />
           <Route path="/register" element={<Signup />} />
           <Route path="/login" element={<Login />} />
