@@ -3,6 +3,7 @@ import { Search ,  ShoppingCartOutlined  } from '@material-ui/icons'
 import { Link, NavLink  , useNavigate } from "react-router-dom";
 import { Badge } from '@material-ui/core'
 import { logout , isAuthenticated } from '../pages/auth'
+import { itemsTotal } from '../pages/core/CartHelpers';
 const Navbar = ({user}) => {
   const NavStyles ={
     textDecoration: 'none' , 
@@ -53,7 +54,7 @@ const Navbar = ({user}) => {
                 style={{ textDecoration: 'none' , color: "#000"}} 
                 to="/cart">
                   <MenuItem>
-                    <Badge badgeContent={0} color="primary">
+                    <Badge badgeContent={itemsTotal()} color="primary">
                       <ShoppingCartOutlined />
                     </Badge>
                   </MenuItem>
@@ -70,7 +71,7 @@ const Navbar = ({user}) => {
                 style={{ textDecoration: 'none' , color: "#000"}} 
                 to="/cart">
                   <MenuItem>
-                    <Badge badgeContent={2} color="primary">
+                    <Badge badgeContent={itemsTotal()} color="primary">
                       <ShoppingCartOutlined />
                     </Badge>
                   </MenuItem>

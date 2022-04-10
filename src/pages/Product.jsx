@@ -1,8 +1,48 @@
 import { Add, ArrowDropDown, Remove, Star } from '@material-ui/icons'
-import { useState } from 'react'
+import { useState ,useEffect} from 'react'
 import styled from 'styled-components'
-
+import { read  } from './core/apiCore'
+import { addItem } from './core/CartHelpers'
+import { Navigate } from 'react-router-dom'
 const Product = (props) => {
+  // const path = useLocation().pathname
+  // console.log(path)
+  const [product , setProduct] = useState({
+    id: "Bo1C7io0BTJowXAgNjS9",
+    name: "Clear Acrylic Frame Glasses",
+    image: "https://img.ltwebstatic.com/images3_pi/2021/02/05/161249415611eacd714290f50d7209d58f1f18efbe_thumbnail_900x.webp",
+    price: 30.99,
+    rating:  5 ,
+    discount: 0,
+    reviews: 10,
+    offer: "",
+    category: "accessories",
+  }) //for testing
+  // const [error , setError] = useState(false)
+  // const loadSingleProduct = (productId) => { 
+  //     read(productId).then(data => { 
+  //       if(data.error){
+  //         setError(data.error)
+  //       } else{
+  //         setProduct(data)
+  //       }
+  //     })
+  // }
+  // useEffect(() => {
+  //   const productId = props.match.params.id
+  //   loadSingleProduct(productId) 
+  // },[])
+  const [redirect , setRedirect] = useState(false)
+  const addToCart = () => {
+    addItem(props , () => {
+      setRedirect(true)
+    })
+  }
+  const shouldRedirect = redirect => {
+    if(redirect){
+      return <Navigate to="/cart" />
+    }
+  }
   const [quantity , setQuantity] = useState(1)
   const [review , setReview] = useState('')
   const increaseQuantity = ( id) => {
@@ -20,19 +60,23 @@ const Product = (props) => {
       <Review>{review}</Review>
     )
   }
+
   return (
     <ProductContainer>
+      {shouldRedirect(redirect)}
+      {/* <Title>single product</Title> */}
+      {/* <Wrapper>{JSON.stringify(product)}</Wrapper> */}
      <Wrapper>
        <ImgContainer>
          <Img   
-           src="https://img.ltwebstatic.com/images3_pi/2021/02/05/161249415611eacd714290f50d7209d58f1f18efbe_thumbnail_900x.webp"  
-           alt="Clear Acrylic Frame Glasses"
+          src={product.image}
+          alt={product.name}
          />
        </ImgContainer>
        <InfoContainer>
-         <Title>Clear Acrylic Frame Glasses</Title>
+         <Title>{product.name}</Title>
          <Rating><Star style={{color:"#ffd700"}}/><Star style={{color:"#ffd700"}}/><Star style={{color:"#ffd700"}} /><Star style={{color:"#ffd700"}} /><Star style={{color:"#ffd700"}} />(10)</Rating>
-         <Price>$ 30.99</Price>
+         <Price>{product.price}</Price>
          <Description> Lorem ipsum dolor sit amet consectetur adipisicing elit. 
             asperiores aperiam, expedita dignissimos alias sequi explicabo molestiae 
             obcaecati dolorem necessitatibus nisi voluptatum dicta. 
@@ -42,7 +86,7 @@ const Product = (props) => {
           <Quantity>{quantity}</Quantity>
           <Add onClick={()=> increaseQuantity()} />
         </BtnContainer>
-         <Button>ADD TO CART</Button>
+         <Button onClick={addToCart}>ADD TO CART</Button>
        </InfoContainer>
      </Wrapper>
      <ReviewsContainer>

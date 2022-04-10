@@ -8,6 +8,7 @@ export const addItem = (item , next) => {
       ...item,
       count: 1
   })
+  next()
    // remove duplicates
    // build an Array from new Set and turn it back into array using Array.from
    // so that later we can re-map it
@@ -20,5 +21,14 @@ export const addItem = (item , next) => {
       return cart.find(p => p.id === id)
   })
   localStorage.setItem('cart', JSON.stringify(cart))
+  }
+}
+export const itemsTotal = () => {
+  if (typeof window !== 'undefined'){
+    if(localStorage.getItem('cart')){
+      console.log(localStorage.getItem('cart').length )
+      return localStorage.getItem('cart').length
+    }
+    return 0
   }
 }
