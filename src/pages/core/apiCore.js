@@ -16,7 +16,7 @@ export const getCategories = () => {
     });
 }
 export const getProducts = () => {
-  return fetch(`https://817d6159-922f-499f-9932-72247870ab81.mock.pstmn.io/getProducts`, {
+  return fetch(`${API}/products`, {
     method: 'GET',
   })
     .then(response => {

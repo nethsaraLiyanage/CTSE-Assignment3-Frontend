@@ -1,27 +1,31 @@
 import {  Add, DeleteOutline, Remove } from '@material-ui/icons'
+import { update } from 'lodash'
 import { useState} from 'react'
 import styled from 'styled-components'
-const CartItem = ({product }) => {
-    const [quantity , setQuantity] = useState(()=> product.quantity)
-  const increaseQuantity = ( id) => {
+const CartItem = ({cartItem , cartUpdate = false }) => {
+  const [quantity , setQuantity] = useState( cartItem.count )
+  const increaseQuantity = ( productId) => {
     setQuantity((prev) =>  prev + 1)
+    updateItem(productId , quantity)
   }
-  const decreaseQuantity = ( id) => {
+  const decreaseQuantity = ( productId) => {
     setQuantity((prev) =>  prev - 1)
+    updateItem(productId , quantity)
   }
+  
   return (
     <Container>
       <ProductDetail>
-        <ProductImage src={product.image} alt={product.name}/>
+        <ProductImage src={cartItem.image} alt={cartItem.name}/>
         <Details>
-          <ProductName><b>Product: </b>{product.name}</ProductName>
-          <ProductId><b>ID: </b>{product.id}</ProductId>
-          <ProductCategory><b>Category: </b>{product.category}</ProductCategory>
+          <ProductName><b>Product: </b>{cartItem.name}</ProductName>
+          <ProductId><b>ID: </b>{cartItem.id}</ProductId>
+          <ProductCategory><b>Category: </b>{cartItem.category}</ProductCategory>
           <DeleteOutline style={{fontSize:"30px",cursor:"pointer"}} />
         </Details>
       </ProductDetail>
       <PriceDetail>
-        <Price>$ {product.price * quantity}</Price>
+        <Price>$ {cartItem.price * quantity}</Price>
         <BtnContainer>
           <Remove onClick={()=> decreaseQuantity()} />
           <Quantity>{quantity}</Quantity>

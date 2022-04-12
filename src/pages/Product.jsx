@@ -2,12 +2,12 @@ import { Add, ArrowDropDown, Remove, Star } from '@material-ui/icons'
 import { useState ,useEffect} from 'react'
 import styled from 'styled-components'
 import { read  } from './core/apiCore'
-import { addItem } from './core/CartHelpers'
+import { addItem , updateItem} from './core/CartHelpers'
 import { Navigate } from 'react-router-dom'
 const Product = (props) => {
   // const path = useLocation().pathname
   // console.log(path)
-  const [product , setProduct] = useState({
+  const [product , setProduct] = useState([{
     id: "Bo1C7io0BTJowXAgNjS9",
     name: "Clear Acrylic Frame Glasses",
     image: "https://img.ltwebstatic.com/images3_pi/2021/02/05/161249415611eacd714290f50d7209d58f1f18efbe_thumbnail_900x.webp",
@@ -17,25 +17,26 @@ const Product = (props) => {
     reviews: 10,
     offer: "",
     category: "accessories",
-  }) //for testing
-  // const [error , setError] = useState(false)
-  // const loadSingleProduct = (productId) => { 
-  //     read(productId).then(data => { 
-  //       if(data.error){
-  //         setError(data.error)
-  //       } else{
-  //         setProduct(data)
-  //       }
-  //     })
-  // }
-  // useEffect(() => {
-  //   const productId = props.match.params.id
-  //   loadSingleProduct(productId) 
-  // },[])
+    count: 0,
+  }]) //for testing
+  const [error , setError] = useState(false)
+  const loadSingleProduct = (productId) => { 
+      read(productId).then(data => { 
+        if(data.error){
+          setError(data.error)
+        } else{
+          setProduct(data)
+        }
+      })
+  }
+  useEffect(() => {
+    // const productId = props.match.params.id
+    loadSingleProduct(product.id) 
+  },[])
   const [redirect , setRedirect] = useState(false)
   const addToCart = () => {
-    addItem(props , () => {
-      setRedirect(true)
+    addItem(product , () => {
+      console.log("Item added")
     })
   }
   const shouldRedirect = redirect => {
@@ -45,11 +46,13 @@ const Product = (props) => {
   }
   const [quantity , setQuantity] = useState(1)
   const [review , setReview] = useState('')
-  const increaseQuantity = ( id) => {
+  const increaseQuantity = ( productId) => {
     setQuantity((prev) =>  prev + 1)
+    updateItem( productId , quantity)
   }
-  const decreaseQuantity = ( id) => {
+  const decreaseQuantity = ( productId) => {
     setQuantity((prev) =>  prev - 1)
+    updateItem( productId , quantity)
   }
   function handleChange(event) {
     setReview(event.target.value)
@@ -82,9 +85,9 @@ const Product = (props) => {
             obcaecati dolorem necessitatibus nisi voluptatum dicta. 
          </Description>
          <BtnContainer>
-          <Remove onClick={()=> decreaseQuantity()} />
+          <Remove onClick={()=> decreaseQuantity(product.id)} />
           <Quantity>{quantity}</Quantity>
-          <Add onClick={()=> increaseQuantity()} />
+          <Add onClick={()=> increaseQuantity(product.id)} />
         </BtnContainer>
          <Button onClick={addToCart}>ADD TO CART</Button>
        </InfoContainer>
