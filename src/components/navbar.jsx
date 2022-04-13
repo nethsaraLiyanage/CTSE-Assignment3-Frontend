@@ -1,9 +1,10 @@
 import styled from 'styled-components'
-import { Search ,  ShoppingCartOutlined  } from '@material-ui/icons'
+import {  ShoppingCartOutlined  } from '@material-ui/icons'
 import { Link, NavLink  , useNavigate } from "react-router-dom";
 import { Badge } from '@material-ui/core'
 import { logout , isAuthenticated } from '../pages/auth'
 import { itemsTotal } from '../pages/core/CartHelpers';
+import Search from './Search'
 const Navbar = ({user}) => {
   const NavStyles ={
     textDecoration: 'none' , 
@@ -37,13 +38,14 @@ const Navbar = ({user}) => {
               to="/contact"><MenuItem>Contact</MenuItem></NavLink>
           </NavContainer>
         </Left>
-        <Center>
+        {/* <Center>
           <SearchContainer>
             <Search  style={{color:"gray",fontSize :"16px"}} />
             <Input />
           </SearchContainer>
           <Button color={"#00ACEE"}>Search</Button>
-        </Center>
+        </Center> */}
+        <Search />
         <Right>
           {!isAuthenticated() && (
             <>
