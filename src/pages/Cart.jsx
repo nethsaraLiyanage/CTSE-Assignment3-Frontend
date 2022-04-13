@@ -1,46 +1,56 @@
-import { useState } from 'react'
+import { useState , useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import CartItem from '../components/CartItem'
 import { cartItems } from '../data'
+import { getCart } from './core/CartHelpers'
+import { itemsTotal , updateItem } from './core/CartHelpers'
 const Cart = () => {
-
-  let navigate = useNavigate()
-  const redirect = (props) =>{
-    let path = props.path
+  const [items , setItems] = useState([])
+  useEffect(() => {
+    setItems(getCart())
+  },[items])
+  const navigate = useNavigate()
+  const redirect = () => {
+    let path = '/shop'
     navigate(path)
   }
-  const cartProducts = cartItems.map((item, index) => {
-    return (
+  const cartProducts = items.map( (item) => (
     <CartItem 
-      key={index} 
-      product={item} 
-      />
-    )
-  })
-  const TotalOrder = () => {
-    let total = 0
-    cartItems.map((item) => {
-      total += item.price * item.quantity
-    })
-    return total
-  }
+      key={item.id} 
+      cartItem={item} 
+      cartUpdate={true}
+    />
+  ))
+  const noItemsMessage = () => (
+    <Message>
+      <MessageText>Your cart is empty</MessageText>
+      <TopButton 
+        color={"#fff"} 
+        bgColor={"#00acee"}
+        style={{border: 'none'}}
+        onClick={() => redirect()}
+        >Continue Shopping</TopButton>
+    </Message>
+  )
   return (
     <CartContainer>
     <Title>Your Cart</Title>
+    {items.length ? 
     <Top>
       <TopButton 
         color={"#000"} 
         bgColor={"#fff"}
         onClick={() => redirect({path: "/"})}
-        >Continue Shopping</TopButton>
-      <TopText>Shopping Cart(2)</TopText>
+        >Continue Shopping</TopButton> 
+      <TopText>Shopping Cart ({items.length})</TopText>
       <TopButton 
         color={"#fff"} 
         bgColor={"#000"}
         onClick={() => redirect({path: "/checkout"})}
-        >Checkout Now</TopButton>
-    </Top>
+        >Checkout Now</TopButton> 
+    </Top> : null}
+    { items.length === 0 ? noItemsMessage() :
     <Bottom>
       <ProductInfo>{cartProducts}</ProductInfo>
       <Summary>
@@ -60,7 +70,7 @@ const Cart = () => {
           </SummaryItem>
         <Button>CHECKOUT NOW</Button>
       </Summary>
-    </Bottom>
+    </Bottom>}
     </CartContainer>
   )
 }
@@ -91,8 +101,7 @@ const TopButton = styled.button`
   }
 `
 const TopText = styled.p`
-  text-decoration: underline;
-  cursor: pointer;
+  cursor: pointer;+
 `
 const Bottom = styled.div`
   display: flex;
@@ -138,4 +147,18 @@ const Button = styled.button`
     color: #000;
     border: 1px solid #000;
   }
+`
+const Message = styled.div`
+  flex:3;
+  margin-right: 2em;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`
+const MessageText = styled.p`
+  font-size: 1.5em;
+  font-weight: 400;
 `

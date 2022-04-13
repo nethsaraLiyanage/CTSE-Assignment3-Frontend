@@ -1,16 +1,32 @@
 import styled from 'styled-components'
 import {   ShoppingCartOutlined  } from '@material-ui/icons'
+import { Link , Navigate } from 'react-router-dom'
+import { addItem } from '../pages/core/CartHelpers'
+import { useState } from 'react'
 const Product = (props) => {
+  const [redirect , setRedirect] = useState(false)
  const calcDiscount =(props.discount / 100) * props.price
+  const addToCart = () => {
+    addItem(props , () => {
+      setRedirect(true)
+    })
+  }
+  const shouldRedirect = redirect => {
+    if(redirect){
+      return <Navigate to="/cart" />
+    }
+  }
   return (
+  <Link to={`/product/${props.id}`} style={{textDecoration:"none"}} >
     <ProductEle>
+        {shouldRedirect(redirect)}
         <ImageContainer>
           {props.offer && <Offer>{props.offer}</Offer>}
           <ProductImage src={props.image} alt={props.name}/>
           <Info>
-            <Icon onClick={props.handleClick} >
-              <ShoppingCartOutlined  />
-            </Icon>
+              <Icon >
+                <ShoppingCartOutlined onClick={addToCart} />
+              </Icon>
           </Info>
         </ImageContainer>
         <ProductInfo>
@@ -28,6 +44,7 @@ const Product = (props) => {
           </div> : <div>${props.price}</div> }</ProductPrice>
         </ProductInfo>
       </ProductEle>
+      </Link>
   )
 }
 
@@ -102,6 +119,7 @@ const ProductName = styled.p`
   font-weight: 500;
   margin: 0; 
   margin-top: 10px;
+  color: #000;
 `
 const ProductRate = styled.div`
   display: flex;
@@ -117,6 +135,7 @@ const ProductPrice = styled.div`
   font-size: 1rem;
   font-weight: 700;
   margin-top: 0.5rem;
+  color: #000;
   .old-price{
     text-decoration: line-through;
     color: #999;
