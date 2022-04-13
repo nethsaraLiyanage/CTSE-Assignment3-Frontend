@@ -1,10 +1,10 @@
 import {useState , useEffect} from 'react'
 import styled from 'styled-components'
-import Slider from '../components/Slider'
-import Categories from './Categories'
-import Sale from '../components/Sale'
-import NewArrivals from '../components/NewArrivals'
 import { getProducts } from './core/apiCore'
+import Categories from '../components/Categories'
+import Slider from '../components/Slider'
+import NewArrivals from '../components/NewArrivals'
+import Sale from '../components/Sale'
 const Home = () => {
     const [productsBySell, setProductsBySell] = useState([])
     const [productsByArrival, setProductsByArrival] = useState([])
@@ -29,8 +29,14 @@ const Home = () => {
     <HomeContainer>
       <Slider />
       <Categories />
-      <Sale productsBySell={productsBySell} loadProductsBySell={loadProductsBySell} />
-      <NewArrivals productsByArrival={productsByArrival} loadProductsByArrival={loadProductsByArrival} />
+      <Sale 
+        productsBySell={productsBySell} 
+        loadProductsBySell={loadProductsBySell} 
+      />
+      <NewArrivals 
+        productsByArrival={productsByArrival} 
+        loadProductsByArrival={loadProductsByArrival}
+      />
     </HomeContainer>
   )
 }

@@ -1,7 +1,7 @@
 import { API } from "../../config";
  // POST request to create a new user
 export const register = async(user) => {
-    return await fetch(`${API}/register` , {
+    return await fetch(`${API}/auth` , {
       method:"POST",
       headers:{
         Accept:"application/json",
@@ -14,7 +14,7 @@ export const register = async(user) => {
   }
 
 export const signin = async(user) => {
-    return await fetch(`${API}/signin` , {
+    return await fetch(`${API}/auth` , {
       method:"POST",
       headers:{
         Accept:"application/json",

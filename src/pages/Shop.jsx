@@ -11,33 +11,32 @@ const Shop = () => {
         filters: {category: [], price: []},
     })
     const [categories, setCategories] = useState([])
-    // const [error, setError] = useState(false)
+    const [error, setError] = useState(false)
     const [limit, setLimit] = useState(6)
     const [skip, setSkip] = useState(0)
     const [filteredResults , setFilteredResults] = useState([])
     const init = () => {
-    //  getCategories.then(data => {
-    //      if (data.error) {
-    //          setError(data.error)
-    //      } else {
-    //          setCategories(data)
-    //      }
-    // }) 
-      setCategories(categoriesData)
+      getCategories.then(data => {
+        if (data.error) {
+            setError(data.error)
+        } else {
+            setCategories(data)
+        }
+      }) 
+      setCategories(categories)
     }
-    // const loadFilteredResults = (newFilters) => {
-    //   // console.log(newFilters)
-    //   getFilteredProducts(skip, limit, newFilters).then(data => {
-    //     if (data.error) {
-    //       console.log(data.error)
-    //     } else {
-    //       setFilteredResults(data)
-    //     }
-    //   })
-    // }
+    const loadFilteredResults = (newFilters) => {
+      getFilteredProducts(skip, limit, newFilters).then(data => {
+        if (data.error) {
+          console.log(data.error)
+        } else {
+          setFilteredResults(data)
+        }
+      })
+    }
     useEffect(() => {
-    init()
-    // loadFilteredResults(skip, limit, popularProducts)  //myFilters.filters
+      init()
+      loadFilteredResults(skip, limit, myFilters.filters) 
     },[])
     const handleFilters = (filters , filterBy) => {
       const newFilters = {...myFilters}
@@ -46,7 +45,7 @@ const Shop = () => {
           let priceValues = handlePrice(filters)
           newFilters.filters[filterBy] = priceValues
       }
-      // loadFilteredResults(newFilters)
+      loadFilteredResults(newFilters)
       setMyFilters(newFilters)
   }
   const handlePrice = (value) => {
@@ -79,13 +78,13 @@ const Shop = () => {
         </FilterWrapper>
       </Filter>
     <Content>
-        {popularProducts.map((product, i) => (  //allProducts.map((product, i) => (
+        {popularProducts.map((product, i) => (  // data should be here not dummy data
         <Product key={i} {...product} />
-      )) 
-  }  
-      {/* filteredResults.map((product, i) => (  //filteredResults.map((product, i) => (
+        )) 
+        }  
+      {filteredResults.map((product, i) => (  // after selcetion of filters
         <Product key={i} {...product} />
-      )) */}
+      ))}
     </Content>
     </Container>
   )
@@ -93,11 +92,9 @@ const Shop = () => {
 
 export default Shop
 const Container = styled.div`
-/* max-width: 80%; */
-/* margin: 0 auto; */
-display: flex;
-justify-content: space-between;
-margin: 4em 2em;
+  display: flex;
+  justify-content: space-between;
+  margin: 4em 2em;
 `
 const Filter = styled.aside`
   display: flex;
@@ -106,8 +103,8 @@ const Filter = styled.aside`
   width: 22%;
 `
 const Title = styled.h4`
-margin-top: 0;
-margin-bottom: 0.5em;
+  margin-top: 0;
+  margin-bottom: 0.5em;
 `
 const Content = styled.main`
   display: flex;
@@ -115,6 +112,5 @@ const Content = styled.main`
   gap: 20px;
   overflow-x: auto;
   margin-bottom: 2em;
-
 `
 const FilterWrapper = styled.div``
