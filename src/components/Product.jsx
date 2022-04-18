@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import {   ShoppingCartOutlined  } from '@material-ui/icons'
+import {   ShoppingCartOutlined , Star } from '@material-ui/icons'
 import { Link , Navigate } from 'react-router-dom'
 import { addItem } from '../pages/core/CartHelpers'
 import { useState } from 'react'
@@ -17,7 +17,11 @@ const Product = (props) => {
     }
   }
   return (
-  <Link to={`/product/${props.id}`} style={{textDecoration:"none"}} >
+  <Link 
+    to={`/product/${props.id}`} 
+    style={{textDecoration:"none"}} 
+    
+  >
     <ProductEle>
         {shouldRedirect(redirect)}
         <ImageContainer>
@@ -33,7 +37,7 @@ const Product = (props) => {
           <ProductName>{props.name}</ProductName>
           <ProductRate>{
             Array(props.rating).fill().map((_) => (
-              <StarIcon src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png" />
+              <Star style={{color: "#FFD700"}} />
               ))}
           </ProductRate>
           <ProductPrice>
@@ -41,7 +45,8 @@ const Product = (props) => {
           <div>
             <span className='new-price' >${ (props.price - calcDiscount).toPrecision(4) }</span>
             <span className='old-price'>${props.price}</span>
-          </div> : <div>${props.price}</div> }</ProductPrice>
+          </div> : <div>${props.price}</div> }
+          </ProductPrice>
         </ProductInfo>
       </ProductEle>
       </Link>
@@ -146,4 +151,7 @@ const ProductPrice = styled.div`
     color: rgba(255,0,0,0.8);
     margin-right: 0.8rem;
   }
+`
+const Button = styled.button`
+
 `
