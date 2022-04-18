@@ -1,18 +1,24 @@
 import { useState , useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import CartItem from '../components/CartItem'
-import { cartItems } from '../data'
 import { getCart } from './core/CartHelpers'
 import { itemsTotal , updateItem } from './core/CartHelpers'
+import { isAuthenticated} from './auth/index'
 const Cart = () => {
   const [items , setItems] = useState([])
+  const [run, setRun] = useState(false);
   useEffect(() => {
     setItems(getCart())
-  },[items])
+  },[run])
+  console.log(items)
   const navigate = useNavigate()
   const redirect = () => {
     let path = '/shop'
+    navigate(path)
+  }
+  const handleCheckout = () => {
+    let path = '/checkout'
     navigate(path)
   }
   const cartProducts = items.map( (item) => (
@@ -20,8 +26,12 @@ const Cart = () => {
       key={item.id} 
       cartItem={item} 
       cartUpdate={true}
+      setRun={setRun}
+      run={run}
     />
   ))
+  const SubTotal = items.map(item => item.price * item.count).reduce((a,b) => a + b , 0)
+  
   const noItemsMessage = () => (
     <Message>
       <MessageText>Your cart is empty</MessageText>
@@ -38,17 +48,12 @@ const Cart = () => {
     <Title>Your Cart</Title>
     {items.length ? 
     <Top>
-      <TopButton 
-        color={"#000"} 
-        bgColor={"#fff"}
-        onClick={() => redirect({path: "/"})}
-        >Continue Shopping</TopButton> 
       <TopText>Shopping Cart ({items.length})</TopText>
       <TopButton 
         color={"#fff"} 
-        bgColor={"#000"}
-        onClick={() => redirect({path: "/checkout"})}
-        >Checkout Now</TopButton> 
+        bgColor={"#00acee"}
+        onClick={() => redirect({path: "/"})}
+        >Continue Shopping</TopButton> 
     </Top> : null}
     { items.length === 0 ? noItemsMessage() :
     <Bottom>
@@ -57,7 +62,9 @@ const Cart = () => {
         <SummaryTitle>Order Summary</SummaryTitle>
           <SummaryItem>
             <SummaryItemText>Subtotal</SummaryItemText>
-            <SummaryItemPrice>$ 74.9</SummaryItemPrice>
+            <SummaryItemPrice>{
+                SubTotal.toFixed(2)
+              }</SummaryItemPrice>
           </SummaryItem>
           <SummaryItem>
             <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -66,9 +73,12 @@ const Cart = () => {
           <hr/>
           <SummaryItem type="total">
             <SummaryItemText>Total</SummaryItemText>
-            <SummaryItemPrice>$ 80</SummaryItemPrice>
+            <SummaryItemPrice>{(SubTotal + 5.91).toFixed(2)}</SummaryItemPrice>
           </SummaryItem>
-        <Button>CHECKOUT NOW</Button>
+          <Button onClick={()=> handleCheckout()}>CHECKOUT NOW</Button>
+        {/* {isAuthenticated() ? 
+          (<Button onClick={()=> handleCheckout()}>CHECKOUT NOW</Button>) : 
+          (<Link to="/login" style={{alignSelf:"center"}}><Button>SIGN IN TO CHECKOUT</Button></Link>)} */}
       </Summary>
     </Bottom>}
     </CartContainer>
@@ -84,10 +94,7 @@ const Title = styled.h1`
   text-align: center;
 `
 const Top = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
+  padding: 2em;
 `
 
 const TopButton = styled.button`
@@ -95,13 +102,15 @@ const TopButton = styled.button`
   background-color: ${props => props.bgColor};
   color: ${props => props.color};
   padding: 5px 10px;
+  border: none;
   &:hover {
     background-color: ${props => props.color};
     color: ${props => props.bgColor};
   }
 `
 const TopText = styled.p`
-  cursor: pointer;+
+  cursor: pointer;
+  text-align: center;
 `
 const Bottom = styled.div`
   display: flex;
@@ -142,6 +151,7 @@ const Button = styled.button`
   border: none;
   font-weight: 500;
   letter-spacing: 1px;
+  align-self: center;
   &:hover {
     background-color: #fff;
     color: #000;

@@ -1,18 +1,16 @@
 import {  Add, DeleteOutline, Remove } from '@material-ui/icons'
-import { update } from 'lodash'
 import { useState} from 'react'
 import styled from 'styled-components'
-const CartItem = ({cartItem , cartUpdate = false }) => {
+import { removeItem , updateItem} from '../pages/core/CartHelpers'
+const CartItem = ({cartItem ,  setRun = f => f,run = undefined }) => {
   const [quantity , setQuantity] = useState( cartItem.count )
-  const increaseQuantity = ( productId) => {
-    setQuantity((prev) =>  prev + 1)
-    updateItem(productId , quantity)
-  }
-  const decreaseQuantity = ( productId) => {
-    setQuantity((prev) =>  prev - 1)
-    updateItem(productId , quantity)
-  }
-  
+  const handleQuantity = (type) => {
+    if (type === "dec") {
+      quantity > 1 && setQuantity( quantity - 1);
+    } else {
+      setQuantity( quantity + 1);
+    }
+  }; 
   return (
     <Container>
       <ProductDetail>
@@ -21,15 +19,31 @@ const CartItem = ({cartItem , cartUpdate = false }) => {
           <ProductName><b>Product: </b>{cartItem.name}</ProductName>
           <ProductId><b>ID: </b>{cartItem.id}</ProductId>
           <ProductCategory><b>Category: </b>{cartItem.category}</ProductCategory>
-          <DeleteOutline style={{fontSize:"30px",cursor:"pointer"}} />
+          <DeleteOutline style={{fontSize:"30px",cursor:"pointer"}} 
+            onClick={() => {
+              removeItem(cartItem.id , quantity)
+              setRun(!run)
+            }} 
+          />
         </Details>
       </ProductDetail>
       <PriceDetail>
-        <Price>$ {cartItem.price * quantity}</Price>
+        <Price>$ {(cartItem.price * quantity).toFixed(2)}</Price>
         <BtnContainer>
-          <Remove onClick={()=> decreaseQuantity()} />
+          <Remove onClick={()=> 
+            {
+              setRun(!run)
+              handleQuantity("dec")
+              updateItem(cartItem.id , quantity)
+            }} 
+          />
           <Quantity>{quantity}</Quantity>
-          <Add onClick={()=> increaseQuantity()} />
+          <Add onClick={()=>{
+              setRun(!run)
+              handleQuantity("inc")
+              updateItem(cartItem.id , quantity)
+            }} 
+          />
         </BtnContainer>
       </PriceDetail>
     </Container>
@@ -84,6 +98,6 @@ const Quantity = styled.p`
  margin: -7px 10px 0;
 `
 const Price = styled.p`
- font-size: 1.4em;
- font-weight: 700;
+ font-size: 1.3em;
+ font-weight: 600;
 `

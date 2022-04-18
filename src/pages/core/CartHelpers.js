@@ -1,4 +1,4 @@
-export const addItem = (item , next) => {
+export const addItem = (item ={},count = 0, next = f => f) => {
   let cart = []
   if(typeof window !== 'undefined'){
   if(localStorage.getItem('cart')){
@@ -18,31 +18,29 @@ export const addItem = (item , next) => {
    // ...with the array of ids we got on when first map() was used
    // run map() on it again and return the actual product from the cart
     cart = Array.from(new Set(cart.map(p => p.id))).map(id => {
-      return cart.find(p => p.id === id)
-  })
-  localStorage.setItem('cart', JSON.stringify(cart))
-  next()
+            return cart.find(p => p.id === id);
+        });
+        localStorage.setItem('cart', JSON.stringify(cart));
+        next();
   }
 }
 export const itemsTotal = () => {
   if (typeof window !== 'undefined'){
     if(localStorage.getItem('cart')){
-      console.log(localStorage.getItem('cart').length )
-      return localStorage.getItem('cart').length
+      return JSON.parse(localStorage.getItem('cart')).length;
     }
-    return 0
   }
+  return 0
 }
 export const getCart = () => {
   if (typeof window !== 'undefined'){
     if(localStorage.getItem('cart')){
-      console.log(localStorage.getItem('cart') )
-      return localStorage.getItem('cart')
-    }else{
-      return []
+      return JSON.parse(localStorage.getItem('cart'))
     }
   }
+  return []
 }
+
 export const updateItem = (productId, count) => {
   let cart = []
   if(typeof window !== 'undefined'){
@@ -51,9 +49,26 @@ export const updateItem = (productId, count) => {
     }
     cart.map((product, i) => {
       if(product.id === productId){
+        console.log(count)
         cart[i].count = count
       }
     })
       localStorage.setItem('cart' , JSON.stringify(cart))
     }
+  }
+export const removeItem = (productId, count) => {
+  let cart = []
+  if(typeof window !== 'undefined'){
+    if(localStorage.getItem('cart')){
+      cart = JSON.parse(localStorage.getItem('cart'))
+    }
+    cart.map((product, i) => {
+      if(product.id === productId){
+        cart.splice(i , 1) 
+      }
+    })
+      localStorage.setItem('cart' , JSON.stringify(cart))
+    }
+    console.log(cart)
+    return cart
   }
