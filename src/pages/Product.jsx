@@ -3,115 +3,79 @@ import { useState ,useEffect} from 'react'
 import styled from 'styled-components'
 import { read  } from './core/apiCore'
 import { addItem , updateItem} from './core/CartHelpers'
-import { Navigate } from 'react-router-dom'
-const Product = (props) => {
-  // const path = useLocation().pathname
-  // console.log(path)
-  const [product , setProduct] = useState([{
-    id: "Bo1C7io0BTJowXAgNjS9",
-    name: "Clear Acrylic Frame Glasses",
-    image: "https://img.ltwebstatic.com/images3_pi/2021/02/05/161249415611eacd714290f50d7209d58f1f18efbe_thumbnail_900x.webp",
+import { Navigate , useLocation } from 'react-router-dom'
+const Product = () => {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+  const [product, setProduct] = useState({
+    id: "asgghuhufghbjnjkjh",
+    name: "Toddler Girls Striped Puff Sleeve Belted Dress",
+    image: "https://img.ltwebstatic.com/images3_pi/2021/02/18/1613616545700f279547cf14d9843d6e0aee6a88ba_thumbnail_900x.webp",
     price: 30.99,
-    rating:  5 ,
     discount: 0,
-    reviews: 10,
+    desc: "little girl dress",
+    rating: 5,
+    reviews: 8,
     offer: "",
-    category: "accessories",
-    count: 0,
-  }]) //for testing
-  const [error , setError] = useState(false)
-  const loadSingleProduct = (productId) => { 
-      read(productId).then(data => { 
-        if(data.error){
-          setError(data.error)
-        } else{
-          setProduct(data)
-        }
-      })
-  }
+    category: "fashion",
+  });
+  const [quantity, setQuantity] = useState(1)
   useEffect(() => {
-    // const productId = props.match.params.id
-    loadSingleProduct(product.id) 
-  },[])
-  const [redirect , setRedirect] = useState(false)
-  const addToCart = () => {
-    addItem(product , () => {
-      console.log("Item added")
+    read(id).then(data => {
+      if (data.error) {
+        console.log(data.error);
+      } else {
+        setProduct(data);
+      }
+    })
+  }, [id]);
+  const rate = () => {
+    let rating = [];
+    for(let i = 0; i < product.rating; i++){
+      rating.push(i)
+    }
+    rating.map(rate => {
+      return <Star />
     })
   }
-  const shouldRedirect = redirect => {
-    if(redirect){
-      return <Navigate to="/cart" />
+  const handleClick = () =>{
+    updateItem( id ,quantity);
+    addItem(product, () => {
+      console.log("Item added");
+    });
+  }
+  const handleQuantity = (type) => {
+    if (type === "dec") {
+      quantity > 1 && setQuantity(quantity - 1);
+    } else {
+      setQuantity(quantity + 1);
     }
-  }
-  const [quantity , setQuantity] = useState(1)
-  const [review , setReview] = useState('')
-  const increaseQuantity = ( productId) => {
-    setQuantity((prev) =>  prev + 1)
-    updateItem( productId , quantity)
-  }
-  const decreaseQuantity = ( productId) => {
-    setQuantity((prev) =>  prev - 1)
-    updateItem( productId , quantity)
-  }
-  function handleChange(event) {
-    setReview(event.target.value)
-  }
-  function handleSubmit (e){
-    e.preventDefault()
-    return (
-      <Review>{review}</Review>
-    )
-  }
-
+  };
   return (
     <ProductContainer>
-      {shouldRedirect(redirect)}
-      {/* <Title>single product</Title> */}
-      {/* <Wrapper>{JSON.stringify(product)}</Wrapper> */}
-     <Wrapper>
-       <ImgContainer>
-         <Img   
-          src={product.image}
-          alt={product.name}
-         />
-       </ImgContainer>
-       <InfoContainer>
-         <Title>{product.name}</Title>
-         <Rating><Star style={{color:"#ffd700"}}/><Star style={{color:"#ffd700"}}/><Star style={{color:"#ffd700"}} /><Star style={{color:"#ffd700"}} /><Star style={{color:"#ffd700"}} />(10)</Rating>
-         <Price>{product.price}</Price>
-         <Description> Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            asperiores aperiam, expedita dignissimos alias sequi explicabo molestiae 
-            obcaecati dolorem necessitatibus nisi voluptatum dicta. 
-         </Description>
-         <BtnContainer>
-          <Remove onClick={()=> decreaseQuantity(product.id)} />
-          <Quantity>{quantity}</Quantity>
-          <Add onClick={()=> increaseQuantity(product.id)} />
-        </BtnContainer>
-         <Button onClick={addToCart}>ADD TO CART</Button>
-       </InfoContainer>
-     </Wrapper>
-     <ReviewsContainer>
-       <Reviews>
-         <Title>All Reviews</Title>
-         <Review>i like it</Review>
-         <Review>i like it</Review>
-         <Review>i like it</Review>
-         <Review>i like it</Review>
-         <Review>i like it</Review>
-         <Review>i like it</Review>
-         <Review>i like it</Review>
-         <Review>i like it</Review>
-       </Reviews>
-       <Form>
-        <TextArea 
-          type="text"
-          placeholder="Write your review here"
-        />
-        <SubButton>SUBMIT</SubButton> 
-       </Form>
-     </ReviewsContainer>
+      <Wrapper>
+        <ImgContainer>
+          <Img src={product.image} />
+        </ImgContainer>
+        <InfoContainer>
+          <Title>{product.name}</Title>
+          <Desc>{product.desc}</Desc>
+          <Rates>{
+            Array(product.rating).fill().map((_) => (
+              <Star style={{color: "#FFD700"}} />
+              ))}
+          </Rates>
+          <Price>$ {product.price}</Price>
+          <AddContainer>
+            <AmountContainer>
+              <Remove onClick={() => handleQuantity("dec")} />
+              <Amount>{quantity}</Amount>
+              <Add onClick={() => handleQuantity("inc")} />
+            </AmountContainer>
+            <Button onClick={handleClick}>ADD TO CART</Button>
+          </AddContainer>
+        </InfoContainer>
+      </Wrapper>
     </ProductContainer>
   )
 }
@@ -123,6 +87,8 @@ const ProductContainer = styled.main`
   width: 80%;
   margin: 0 auto;
 `
+const StarIcon = styled.img``
+const Rates = styled.div``
 const Wrapper = styled.div`
   display: flex;
   align-items: flex-start;
@@ -137,6 +103,7 @@ const Img = styled.img`
   height: 70vh;
   object-fit: cover;
 `
+const Desc = styled.p``
 const InfoContainer = styled.div`
   flex: 1;
   padding: 0 3em;
@@ -155,9 +122,7 @@ const Price = styled.p`
   font-weight: 600;
   margin: 1em 0;
 `
-const Description = styled.p`
-  margin: 1em 0;
-`
+
 const Button = styled.button`
   margin: 1em 0;
   background-color: #000;
@@ -170,56 +135,27 @@ const Button = styled.button`
     border: 1px solid #000;
   }
 `
-const Rating = styled.div``
-const ReviewsContainer = styled.div`
-  display: flex;
-  align-items: center;
-`
-const Form = styled.form`
-  flex: 1;
+const AddContainer = styled.div`
+  width: 50%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 0 3em;
-`
-const Reviews = styled.div`
-  flex: 1;
-`
-const TextArea = styled.textarea`
-  width: 400px;
-  border: 1px solid lightgrey;
-  border-radius: 8px;
-  padding: 10px;
-`
-const SubButton = styled.button`
-  background-color: #00acee;
-  color: #fff;
-  padding: 0.4em 1.3em;
-  border-radius: 5px;
-  border: none;
-  margin-top: 1em;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19);
-  &:active{
-    box-shadow: 0 5px 10px rgba(0,0,0,0.19);
-  }
-  &:focus{
-    outline: none;
-  }
-`
-const Review = styled.div`
-  border-bottom: 1px solid lightgrey;
-  padding: 1em 0;
-  &:last-child{
-    border-bottom: none;
-  }
-`
-const BtnContainer = styled.div`
-  display: flex; 
+  justify-content: space-between;
+`;
+
+const AmountContainer = styled.div`
+  display: flex;
   align-items: center;
-`
-const Quantity = styled.p`
- font-size: 1.7em;
- font-weight: 500;
- margin: -7px 10px 0;
-`
-const Dropdown = styled.span``
+  font-weight: 700;
+`;
+
+const Amount = styled.span`
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid teal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 5px;
+`;
+

@@ -52,7 +52,9 @@ export const read = async(productId) => {
           Accept: 'application/json',
           'Content-Type': 'application/json'
         }
-    })
+    }
+    )
+    return data;
   }catch(e){
     console.log(e.data);
   }
@@ -62,9 +64,10 @@ export const list = async(params) => {
   const query = queryString.stringify(params);
   console.log('query',query)
   try{
-    const { data } = await Axios(`${API}/products?${query}`, {
+    const { data } = await Axios(`${API}/products/search?${query}`, {
         headers: { Accept: 'application/json'}
     })
+    return data;
   }catch(e){
     console.log(e.data);
   }

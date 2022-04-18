@@ -22,7 +22,7 @@ const Home = () => {
         if(data.error) {
           setError(data.error)
         } else {
-          setProductsByArr(data)
+          setProductsByArrival(data)
         }
       })}
   return (
