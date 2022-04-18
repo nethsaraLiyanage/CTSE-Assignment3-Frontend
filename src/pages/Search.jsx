@@ -25,8 +25,8 @@ const SearchPage = () => {
     offer: "",
     category: "accessories",
   }]
-  const SearchResults = results.map((result) => (
-    <Product key={result.id} {...result}  />
+  const SearchResults = results.map((result , i) => (
+    <Product key={i} {...result}  />
   ))
   return (
     <Container>
