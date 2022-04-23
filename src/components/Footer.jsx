@@ -19,11 +19,11 @@ const Footer = () => {
      <Right>
       <SubTitle>Payment Methods</SubTitle>
       <Methods>
-       <Payment 
-        src="https://cdn-icons.flaticon.com/png/512/5025/premium/5025895.png?token=exp=1648457365~hmac=0b56984128e2ff427eff660cfeda73ac" 
+      <Payment 
+        src={process.env.PUBLIC_URL + '/images/cash-on-delivery.png'}
         alt="cash on delivery"
         />
-       <Payment 
+      <Payment 
         src="https://cdn-icons-png.flaticon.com/512/349/349221.png" 
         alt="cash on delivery"
         />
@@ -32,7 +32,7 @@ const Footer = () => {
         alt="cash on delivery"
         />
       </Methods>
-        {/* <Copyright>©2022 O.store All Rights Reserved</Copyright> */}
+        <Copyright>©2022 Sprints All Rights Reserved</Copyright>
      </Right>
     </Container>
   )

@@ -16,21 +16,21 @@ const Shop = () => {
     const [skip, setSkip] = useState(0)
     const [filteredResults , setFilteredResults] = useState([])
     const init = () => {
-      getCategories.then(data => {
-        if (data.error) {
-            setError(data.error)
-        } else {
-            setCategories(data)
-        }
-      }) 
-      setCategories(categories)
+      // getCategories.then(data => {
+      //   if (data.error) {
+      //       setError(data.error)
+      //   } else {
+      //       setCategories(data)
+      //   }
+      // }) 
+      setCategories(categoriesData)
     }
     const loadFilteredResults = (newFilters) => {
       getFilteredProducts(skip, limit, newFilters).then(data => {
         if (data.error) {
           console.log(data.error)
         } else {
-          setFilteredResults(data)
+          setFilteredResults(popularProducts)
         }
       })
     }

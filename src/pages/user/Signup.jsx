@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useState , useEffect , useRef } from 'react'
 import { register } from '../auth'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom' 
 const Signup = () => {
+  const inputRef = useRef(null)
+	useEffect(() => {
+		inputRef.current.focus()
+	}, [])
   const [signUpValues , setSignUpValues] = useState({
     firstName:"",
     lastName:"",
@@ -75,6 +79,7 @@ const Signup = () => {
               placeholder='Enter your First Name'
               onChange={handleChange}
               value={firstName}
+              ref={inputRef}
               required
           />
           <Label htmlFor='lastName'>Last Name</Label>

@@ -1,6 +1,22 @@
-import React from 'react'
+import { useState , useRef } from 'react'
 import styled from 'styled-components'
 const Contact = () => {
+  const form = useRef();
+  const [contactData , setContactData] = useState({
+      userName: '',
+      userEmail: '',
+      userPhone:'',
+      userMessage: ''
+  })
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setContactData({...contactData , [name]: value })
+  }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(contactData)
+  }
+  
   return (
     <Container>
      <Title>Contact Us</Title>
@@ -8,24 +24,32 @@ const Contact = () => {
       <InfoText>Email: info@o-store.com</InfoText>
       <InfoText>Phone: +20 1111 111 111</InfoText>
      </Info>
-     <Form>
+     <Form ref={form} onSubmit={handleSubmit}>
       <Input type="text"
        placeholder="Your Name"
-
-        
+        name="userName"
+        onChange={handleChange}
+        value={contactData.userName}
       />
       <Input type="email"
        placeholder="Your Email"
-       
-        
+       name='userEmail'
+        value={contactData.userEmail}
+        onChange={handleChange}
       />
       <Input type="phone"
        placeholder="Your Phone (optional)"
        width={'100%'}
        className="full-width"
-       
+       name='userPhone'
+        value={contactData.userPhone}
+        onChange={handleChange}
       />
-      <TextArea placeholder='Your message' 
+      <TextArea 
+        placeholder='Your message' 
+        name='userMessage'
+        value={contactData.userMessage}
+        onChange={handleChange}
        />
       <Button>Send Message</Button>
      </Form>
