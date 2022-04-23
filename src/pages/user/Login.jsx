@@ -1,11 +1,15 @@
-import React from 'react'
+import { useEffect , useRef , useState} from 'react'
 import styled from 'styled-components'
 import { useNavigate } from "react-router-dom";
 import { authenticate, signin } from '../auth';
 import { Button , Spinner} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 const Login = () => {
-  const [loginValues, setLoginValues] = React.useState({
+  const inputRef = useRef(null)
+	useEffect(() => {
+		inputRef.current.focus()
+	}, [])
+  const [loginValues, setLoginValues] = useState({
     email: "",
     password: "",
     error: "",
@@ -68,6 +72,7 @@ const Login = () => {
               placeholder='Enter your Email'
               onChange={handleChange}
               value={email}
+              ref={inputRef}
               // error={errors.email}
           />
           <Label htmlFor='password'>Password</Label>

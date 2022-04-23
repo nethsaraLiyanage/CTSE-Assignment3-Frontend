@@ -18,14 +18,14 @@ const Checkout = () => {
             card:"",
             cvv:"",
             exDate:""
-          })
-          const { firstname, lastname, phone, email, address, city, st, zip, card, cvv, exDate } 
-  = checkoutValues
+        })
+    const { firstname, lastname, phone, email, address, city, st, zip, card, cvv, exDate } 
+    = checkoutValues
 
-  const handleChange = event => {
+    const handleChange = event => {
     const { name, value } = event.target
     setcheckoutValues({ ...checkoutValues, error:false, [name]: value })
-  }
+}
 
   const onSubmit = e => {
     e.preventDefault()
