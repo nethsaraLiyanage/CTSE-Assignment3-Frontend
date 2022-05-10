@@ -1,11 +1,23 @@
+<<<<<<< HEAD
 import React from 'react'
+=======
+import { useEffect , useRef , useState} from 'react'
+>>>>>>> ed44f83730a503bd298959bbe5a70015f0cde32f
 import styled from 'styled-components'
 import { useNavigate } from "react-router-dom";
 import { authenticate, signin } from '../auth';
 import { Button , Spinner} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 const Login = () => {
+<<<<<<< HEAD
   const [loginValues, setLoginValues] = React.useState({
+=======
+  const inputRef = useRef(null)
+	useEffect(() => {
+		inputRef.current.focus()
+	}, [])
+  const [loginValues, setLoginValues] = useState({
+>>>>>>> ed44f83730a503bd298959bbe5a70015f0cde32f
     email: "",
     password: "",
     error: "",
@@ -68,6 +80,10 @@ const Login = () => {
               placeholder='Enter your Email'
               onChange={handleChange}
               value={email}
+<<<<<<< HEAD
+=======
+              ref={inputRef}
+>>>>>>> ed44f83730a503bd298959bbe5a70015f0cde32f
               // error={errors.email}
           />
           <Label htmlFor='password'>Password</Label>
