@@ -16,6 +16,16 @@ const Shop = () => {
     const [skip, setSkip] = useState(0)
     const [filteredResults , setFilteredResults] = useState([])
     const init = () => {
+<<<<<<< HEAD
+      getCategories.then(data => {
+        if (data.error) {
+            setError(data.error)
+        } else {
+            setCategories(data)
+        }
+      }) 
+      setCategories(categories)
+=======
       // getCategories.then(data => {
       //   if (data.error) {
       //       setError(data.error)
@@ -24,13 +34,18 @@ const Shop = () => {
       //   }
       // }) 
       setCategories(categoriesData)
+>>>>>>> ed44f83730a503bd298959bbe5a70015f0cde32f
     }
     const loadFilteredResults = (newFilters) => {
       getFilteredProducts(skip, limit, newFilters).then(data => {
         if (data.error) {
           console.log(data.error)
         } else {
+<<<<<<< HEAD
+          setFilteredResults(data)
+=======
           setFilteredResults(popularProducts)
+>>>>>>> ed44f83730a503bd298959bbe5a70015f0cde32f
         }
       })
     }
