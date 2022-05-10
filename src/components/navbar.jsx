@@ -21,11 +21,7 @@ const Navbar = ({user}) => {
       <Wrapper>
         <Left>
           <Link style={{ textDecoration: 'none' , color: "#000"}} to="/">
-<<<<<<< HEAD
-            <Logo>O.store</Logo>
-=======
             <Logo>Sprints</Logo>
->>>>>>> ed44f83730a503bd298959bbe5a70015f0cde32f
           </Link>
           <NavContainer>
             <NavLink 

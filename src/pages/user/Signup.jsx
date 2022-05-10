@@ -1,19 +1,12 @@
-<<<<<<< HEAD
-import { useState } from 'react'
-=======
 import { useState , useEffect , useRef } from 'react'
->>>>>>> ed44f83730a503bd298959bbe5a70015f0cde32f
 import { register } from '../auth'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom' 
 const Signup = () => {
-<<<<<<< HEAD
-=======
   const inputRef = useRef(null)
 	useEffect(() => {
 		inputRef.current.focus()
 	}, [])
->>>>>>> ed44f83730a503bd298959bbe5a70015f0cde32f
   const [signUpValues , setSignUpValues] = useState({
     firstName:"",
     lastName:"",
@@ -86,10 +79,7 @@ const Signup = () => {
               placeholder='Enter your First Name'
               onChange={handleChange}
               value={firstName}
-<<<<<<< HEAD
-=======
               ref={inputRef}
->>>>>>> ed44f83730a503bd298959bbe5a70015f0cde32f
               required
           />
           <Label htmlFor='lastName'>Last Name</Label>

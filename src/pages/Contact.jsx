@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-import React from 'react'
-import styled from 'styled-components'
-const Contact = () => {
-=======
 import { useState , useRef } from 'react'
 import styled from 'styled-components'
 const Contact = () => {
@@ -22,7 +17,6 @@ const Contact = () => {
     console.log(contactData)
   }
   
->>>>>>> ed44f83730a503bd298959bbe5a70015f0cde32f
   return (
     <Container>
      <Title>Contact Us</Title>
@@ -30,18 +24,6 @@ const Contact = () => {
       <InfoText>Email: info@o-store.com</InfoText>
       <InfoText>Phone: +20 1111 111 111</InfoText>
      </Info>
-<<<<<<< HEAD
-     <Form>
-      <Input type="text"
-       placeholder="Your Name"
-
-        
-      />
-      <Input type="email"
-       placeholder="Your Email"
-       
-        
-=======
      <Form ref={form} onSubmit={handleSubmit}>
       <Input type="text"
        placeholder="Your Name"
@@ -54,17 +36,11 @@ const Contact = () => {
        name='userEmail'
         value={contactData.userEmail}
         onChange={handleChange}
->>>>>>> ed44f83730a503bd298959bbe5a70015f0cde32f
       />
       <Input type="phone"
        placeholder="Your Phone (optional)"
        width={'100%'}
        className="full-width"
-<<<<<<< HEAD
-       
-      />
-      <TextArea placeholder='Your message' 
-=======
        name='userPhone'
         value={contactData.userPhone}
         onChange={handleChange}
@@ -74,7 +50,6 @@ const Contact = () => {
         name='userMessage'
         value={contactData.userMessage}
         onChange={handleChange}
->>>>>>> ed44f83730a503bd298959bbe5a70015f0cde32f
        />
       <Button>Send Message</Button>
      </Form>
